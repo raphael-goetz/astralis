@@ -1,0 +1,62 @@
+package de.raphaelgoetz.librarytesting.ux.color
+
+import net.kyori.adventure.bossbar.BossBar
+import net.kyori.adventure.text.format.TextColor
+import org.bukkit.DyeColor
+
+enum class Colorization(val rgbLike: TextColor) {
+    WHITE(TextColor.color(255, 255, 255)),
+    LIGHT_GRAY(TextColor.color(211, 211, 211)),
+    GRAY(TextColor.color(128, 128, 128)),
+    BLACK(TextColor.color(0, 0, 0)),
+    BROWN(TextColor.color(165, 42, 42)),
+    RED(TextColor.color(255, 0, 0)),
+    ORANGE(TextColor.color(255, 165, 0)),
+    YELLOW(TextColor.color(255, 255, 0)),
+    LIME(TextColor.color(0, 255, 0)),
+    GREEN(TextColor.color(0, 128, 0)),
+    CYAN(TextColor.color(0, 255, 255)),
+    LIGHT_BLUE(TextColor.color(173, 216, 230)),
+    BLUE(TextColor.color(0, 0, 255)),
+    PURPLE(TextColor.color(128, 0, 128)),
+    MAGENTA(TextColor.color(255, 0, 255)),
+    PINK(TextColor.color(255, 192, 203))
+}
+
+fun Colorization.asTextColor(): TextColor {
+    return this.rgbLike
+}
+
+fun Colorization.asDyeColor(): DyeColor {
+    return when (this) {
+        Colorization.WHITE -> DyeColor.WHITE
+        Colorization.LIGHT_GRAY -> DyeColor.LIGHT_GRAY
+        Colorization.GRAY -> DyeColor.GRAY
+        Colorization.BLACK -> DyeColor.BLACK
+        Colorization.BROWN -> DyeColor.BROWN
+        Colorization.RED -> DyeColor.RED
+        Colorization.ORANGE -> DyeColor.ORANGE
+        Colorization.YELLOW -> DyeColor.YELLOW
+        Colorization.LIME -> DyeColor.LIME
+        Colorization.GREEN -> DyeColor.GREEN
+        Colorization.CYAN -> DyeColor.CYAN
+        Colorization.LIGHT_BLUE -> DyeColor.LIGHT_BLUE
+        Colorization.BLUE -> DyeColor.BLUE
+        Colorization.PURPLE -> DyeColor.PURPLE
+        Colorization.MAGENTA -> DyeColor.MAGENTA
+        Colorization.PINK -> DyeColor.PINK
+    }
+}
+
+fun Colorization.asBossBarColor(): BossBar.Color {
+    return when (this) {
+        Colorization.WHITE -> BossBar.Color.WHITE
+        Colorization.RED -> BossBar.Color.RED
+        Colorization.YELLOW -> BossBar.Color.YELLOW
+        Colorization.GREEN -> BossBar.Color.GREEN
+        Colorization.BLUE -> BossBar.Color.BLUE
+        Colorization.PURPLE -> BossBar.Color.PURPLE
+        Colorization.PINK -> BossBar.Color.PINK
+        else -> throw Exception("$this has no boss bar color")
+    }
+}
