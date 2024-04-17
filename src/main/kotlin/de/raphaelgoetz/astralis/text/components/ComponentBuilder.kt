@@ -1,7 +1,7 @@
 package de.raphaelgoetz.astralis.text.components
 
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
-import de.raphaelgoetz.librarytesting.ux.color.Colorization
+import de.raphaelgoetz.astralis.ux.color.Colorization
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent

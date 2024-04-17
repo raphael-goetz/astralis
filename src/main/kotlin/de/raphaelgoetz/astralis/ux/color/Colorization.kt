@@ -1,4 +1,4 @@
-package de.raphaelgoetz.librarytesting.ux.color
+package de.raphaelgoetz.astralis.ux.color
 
 import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.format.TextColor

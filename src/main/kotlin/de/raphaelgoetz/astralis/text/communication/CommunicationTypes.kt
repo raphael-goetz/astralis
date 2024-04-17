@@ -1,6 +1,6 @@
 package de.raphaelgoetz.astralis.text.communication
 
-import de.raphaelgoetz.librarytesting.ux.color.Colorization
+import de.raphaelgoetz.astralis.ux.color.Colorization
 import org.bukkit.Sound
 
 enum class CommunicationType(val color: Colorization, val icon: String, val sound: Sound) {
