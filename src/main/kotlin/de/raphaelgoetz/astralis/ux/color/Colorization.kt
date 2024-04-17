@@ -4,6 +4,9 @@ import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.format.TextColor
 import org.bukkit.DyeColor
 
+/**
+ * Enum to map minecraft-color variants to generic color type
+ */
 enum class Colorization(val rgbLike: TextColor) {
     WHITE(TextColor.color(255, 255, 255)),
     LIGHT_GRAY(TextColor.color(211, 211, 211)),
@@ -23,10 +26,19 @@ enum class Colorization(val rgbLike: TextColor) {
     PINK(TextColor.color(255, 192, 203))
 }
 
+/**
+ * @return the TextColor of the Colorization type
+ * @see TextColor
+ */
 fun Colorization.asTextColor(): TextColor {
     return this.rgbLike
 }
 
+/**
+ * @return the DyeColor of the Colorization type
+ * Used for Minecraft-DyeColor, banner, wool...
+ * @see DyeColor
+ */
 fun Colorization.asDyeColor(): DyeColor {
     return when (this) {
         Colorization.WHITE -> DyeColor.WHITE
@@ -48,6 +60,12 @@ fun Colorization.asDyeColor(): DyeColor {
     }
 }
 
+/**
+ * @return the BossBarColor of the Colorization type
+ * Used for Minecraft-BossBar color
+ * @throws Exception when no matching color has been found
+ * @see BossBar.Color
+ */
 fun Colorization.asBossBarColor(): BossBar.Color {
     return when (this) {
         Colorization.WHITE -> BossBar.Color.WHITE
