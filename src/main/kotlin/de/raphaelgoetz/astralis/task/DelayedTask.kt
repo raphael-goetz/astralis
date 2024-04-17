@@ -5,12 +5,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
+/**
+ * @param delay is the time after which the given function gets executed
+ * @param function is the function that gets called
+ * The given function will be called synchronous
+ */
 inline fun doLater(
     delay: Long,
     function: () -> Unit = {}
 ) = DelayedTaskBuilder(false, delay).apply { function() }.execute()
 
-
+/**
+ * @param delay is the time after which the given function gets executed
+ * @param function is the function that gets called
+ * The given function will be called asynchronous
+ */
 inline fun doLaterAsync(
     delay: Long,
     function: () -> Unit = {}

@@ -8,12 +8,28 @@ import kotlin.collections.HashMap
 
 private val dispatcher: HashMap<UUID, Timer> = hashMapOf()
 
+/**
+ * @param delay is the time after which the given function gets executed.
+ * @param period is the time between each function call.
+ * @param function is the function that gets called.
+ * It contains an integer that will be incremented after every execution.
+ * It's main purpose is to count how many times the given function has been called.
+ * The given function will be called synchronous.
+ */
 inline fun doAgain(
     delay: Long,
     period: Long,
     noinline function: RepeatTaskBuilder.(Int) -> Unit = {},
 ) = RepeatTaskBuilder(false, delay, period, function).start()
 
+/**
+ * @param delay is the time after which the given function gets executed.
+ * @param period is the time between each function call.
+ * @param function is the function that gets called.
+ * It contains an integer that will be incremented after every execution.
+ * It's main purpose is to count how many times the given function has been called.
+ * The given function will be called asynchronous
+ */
 inline fun doAgainAsync(
     delay: Long,
     period: Long,
