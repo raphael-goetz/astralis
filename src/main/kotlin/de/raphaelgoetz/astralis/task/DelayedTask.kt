@@ -1,5 +1,6 @@
 package de.raphaelgoetz.astralis.task
 
+import de.raphaelgoetz.astralis.annotations.InternalUse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ inline fun doLaterAsync(
     function: () -> Unit = {}
 ) = DelayedTaskBuilder(true, delay).apply { function() }.execute()
 
+@InternalUse
 data class DelayedTaskBuilder(
     private val async: Boolean,
     private val delay: Long,
@@ -37,6 +39,7 @@ data class DelayedTaskBuilder(
 
 }
 
+@InternalUse
 private fun createTask(
     async: Boolean,
     function: () -> Unit

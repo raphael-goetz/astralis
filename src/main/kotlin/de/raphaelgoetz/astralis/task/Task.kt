@@ -1,5 +1,6 @@
 package de.raphaelgoetz.astralis.task
 
+import de.raphaelgoetz.astralis.annotations.InternalUse
 import kotlinx.coroutines.*
 
 /**
@@ -18,6 +19,7 @@ inline fun doNowAsync(
     function: () -> Unit = {}
 ) = TaskBuilder(true).apply { function() }.execute()
 
+@InternalUse
 class TaskBuilder(
     private val async: Boolean = false,
     private val function: () -> Unit = {}

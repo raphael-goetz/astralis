@@ -1,5 +1,6 @@
 package de.raphaelgoetz.astralis.task
 
+import de.raphaelgoetz.astralis.annotations.InternalUse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,6 +37,11 @@ inline fun doAgainAsync(
     noinline function: RepeatTaskBuilder.(Int) -> Unit = {},
 ) = RepeatTaskBuilder(true, delay, period, function).start()
 
+fun stopTask(uuid: UUID) {
+    tasks.remove(uuid)
+}
+
+@InternalUse
 data class RepeatTaskBuilder(
     private val async: Boolean,
     private val delay: Long,
@@ -68,8 +74,3 @@ data class RepeatTaskBuilder(
         return uuid
     }
 }
-
-fun stopTask(uuid: UUID) {
-    tasks.remove(uuid)
-}
-

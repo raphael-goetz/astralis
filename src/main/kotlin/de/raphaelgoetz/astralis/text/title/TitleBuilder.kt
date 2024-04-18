@@ -1,5 +1,6 @@
 package de.raphaelgoetz.astralis.text.title
 
+import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
 import de.raphaelgoetz.astralis.text.components.adventureText
 import de.raphaelgoetz.astralis.text.title.configuration.TitleAppearAnimation
@@ -16,6 +17,7 @@ inline fun adventureTitle(
     builder: TitleBuilder.() -> Unit
 ) = TitleBuilder(title, subtitle).apply(builder).build()
 
+@InternalUse
 class TitleBuilder(
     private val title: String,
     private val subTitle: String

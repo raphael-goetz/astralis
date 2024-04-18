@@ -1,5 +1,6 @@
 package de.raphaelgoetz.astralis.text.components
 
+import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
 import de.raphaelgoetz.astralis.ux.color.Colorization
 
@@ -25,9 +26,11 @@ inline fun adventureText(
     builder: ComponentBuilder.() -> Unit = {}
 ) = ComponentBuilder(text).apply(builder).build()
 
+
 /**
  * @param input is the default text that the component is build on
  */
+@InternalUse
 class ComponentBuilder(private val input: String) {
 
     var currentStyles = mutableSetOf<TextDecoration>()
