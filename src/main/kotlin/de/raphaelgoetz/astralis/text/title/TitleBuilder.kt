@@ -12,7 +12,7 @@ import java.time.Duration
 
 inline fun adventureTitle(
     title: String,
-    subtitle: String,
+    subtitle: String = "",
     builder: TitleBuilder.() -> Unit
 ) = TitleBuilder(title, subtitle).apply(builder).build()
 

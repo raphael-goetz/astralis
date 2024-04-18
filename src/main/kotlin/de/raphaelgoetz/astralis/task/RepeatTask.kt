@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.HashMap
 
-private val dispatcher: HashMap<UUID, Timer> = hashMapOf()
+private val tasks: HashMap<UUID, Timer> = hashMapOf()
 
 /**
  * @param delay is the time after which the given function gets executed.
@@ -49,7 +49,7 @@ data class RepeatTaskBuilder(
     fun start(): UUID {
 
         val uuid = UUID.randomUUID()
-        dispatcher.putIfAbsent(uuid, timer)
+        tasks.putIfAbsent(uuid, timer)
 
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
@@ -70,6 +70,6 @@ data class RepeatTaskBuilder(
 }
 
 fun stopTask(uuid: UUID) {
-    dispatcher.remove(uuid)
+    tasks.remove(uuid)
 }
 
