@@ -17,8 +17,7 @@ inline fun Player.interrogate(
     },
     timeoutMessage: Component = adventureText("You didn't answer!") { type = CommunicationType.ALERT },
     timeout: Long = 10,
-    noinline onTimeout: (Player) -> Unit = {},
-    crossinline onAnswer: (Player, AsyncChatEvent) -> Unit
+    crossinline onAnswerReceived: (player: Player, answered: Boolean, chatEvent: AsyncChatEvent?) -> Unit
 ) {
 
     //TODO: Players should get an sound when res. a message. like in player.sendText & do inner sync
@@ -28,13 +27,13 @@ inline fun Player.interrogate(
     this.sendMessage(questionMessage)
     val event = this.listen<AsyncChatEvent>(javaPlugin) { asyncChatEvent ->
         message = asyncChatEvent.message()
-        onAnswer.invoke(this@interrogate, asyncChatEvent)
+        onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
     }
 
     doLater(timeout) {
         event.unregister()
         if (message != null) return@doLater
         this.sendMessage(timeoutMessage)
-        onTimeout.invoke(this@interrogate)
+        onAnswerReceived.invoke(this@interrogate, false, null)
     }
 }
