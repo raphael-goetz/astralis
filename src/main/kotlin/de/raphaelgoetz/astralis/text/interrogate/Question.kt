@@ -5,6 +5,7 @@ import de.raphaelgoetz.astralis.event.unregister
 import de.raphaelgoetz.astralis.task.doLater
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
 import de.raphaelgoetz.astralis.text.components.adventureText
+
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player

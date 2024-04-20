@@ -6,6 +6,7 @@ import org.bukkit.DyeColor
 
 /**
  * Enum to map minecraft-color variants to generic color type
+ * @param rgbLike is the TextColor defined through rgb-color codes
  */
 enum class Colorization(val rgbLike: TextColor) {
     WHITE(TextColor.color(255, 255, 255)),

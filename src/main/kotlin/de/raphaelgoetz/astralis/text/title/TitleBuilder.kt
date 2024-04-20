@@ -3,20 +3,31 @@ package de.raphaelgoetz.astralis.text.title
 import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
 import de.raphaelgoetz.astralis.text.components.adventureText
-import de.raphaelgoetz.astralis.text.title.configuration.TitleAppearAnimation
 import de.raphaelgoetz.astralis.text.title.configuration.TitleType
+
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 import net.kyori.adventure.title.Title
 import net.kyori.adventure.title.Title.Times
 import java.time.Duration
 
+/**
+ * Will create a styled adventure Title
+ * @param title is the upper text of the title
+ * @param subtitle is the lower text of the title
+ * @param builder is the builder to style the title
+ * @return an adventure Title
+ */
 inline fun adventureTitle(
     title: String,
     subtitle: String = "",
     builder: TitleBuilder.() -> Unit
 ) = TitleBuilder(title, subtitle).apply(builder).build()
 
+/**
+ * @param title is the upper text of the title
+ * @param subTitle is the lower text of the title
+ */
 @InternalUse
 class TitleBuilder(
     private val title: String,
@@ -59,7 +70,6 @@ class TitleBuilder(
         }
     }
 
-    var animation: TitleAppearAnimation? = null
     var tagResolver: Array<TagResolver>? = null
     var type: CommunicationType? = null
 

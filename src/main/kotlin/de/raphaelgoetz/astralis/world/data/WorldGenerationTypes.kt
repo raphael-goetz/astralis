@@ -4,6 +4,9 @@ import de.raphaelgoetz.astralis.world.generator.VoidGenerator
 import org.bukkit.WorldCreator
 import org.bukkit.WorldType
 
+/**
+ * Generation type wrapper to contain the void generation option
+ */
 enum class WorldGenerationTypes {
     VOID,
     FLAT,
@@ -12,6 +15,11 @@ enum class WorldGenerationTypes {
     AMPLIFIED
 }
 
+/**
+ * Modifies the given world-creator to generate the given type. This is to accomplish an void generator.
+ * @param worldGenerationTypes is the type of the world-generator.
+ * @return the modified WorldCreator that was given.
+ */
 fun WorldCreator.modifyGeneration(worldGenerationTypes: WorldGenerationTypes): WorldCreator {
     return when (worldGenerationTypes) {
         WorldGenerationTypes.VOID -> this.generator(VoidGenerator())
