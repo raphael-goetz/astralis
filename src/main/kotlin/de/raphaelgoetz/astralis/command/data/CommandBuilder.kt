@@ -2,7 +2,6 @@ package de.raphaelgoetz.astralis.command.data
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 
 /**
@@ -18,21 +17,29 @@ data class BasicCommand(
     val commandDescription: String,
     val commandUsage: String = "/$commandName",
     val commandAliases: MutableList<String> = mutableListOf(),
-    inline val body: (executor: Player) -> Unit
-): Command(commandName, commandDescription, commandUsage, commandAliases), TabCompleter {
+    val paths: MutableList<ValueCommandPath<Any>> = arrayListOf(),
+    val body: (executor: Player) -> Unit
+) : Command(commandName) {
 
-    //TODO: ALSO REGISTER TAB_COMPLETER
-    override fun onTabComplete(
-        p0: CommandSender,
-        p1: Command,
-        p2: String,
-        p3: Array<out String>?
-    ): MutableList<String> {
-        return mutableListOf()
+    override fun tabComplete(sender: CommandSender, alias: String, args: Array<out String>?): MutableList<String> {
+        return super.tabComplete(sender, alias, args)
     }
 
-    override fun execute(sender: CommandSender, label: String, p2: Array<out String>?): Boolean {
+    override fun execute(sender: CommandSender, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) return true
+        if (paths.isNotEmpty() && args == null) return true
+        if (label != commandName) return true
+
+        for (currentPath in paths) {
+            val pathList = currentPath.path.split(" ")
+            val argumentList = args!!.toList()
+            if (!(argumentList.containsAll(pathList) && pathList.containsAll(argumentList))) continue
+
+            //TODO:
+            //currentPath.onExecute.invoke(sender)
+            return true
+        }
+
         body.invoke(sender)
         return false
     }
