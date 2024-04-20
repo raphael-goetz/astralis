@@ -4,6 +4,7 @@ import de.raphaelgoetz.astralis.world.data.WorldBuilder
 import de.raphaelgoetz.astralis.world.data.WorldGenerationTypes
 import org.bukkit.Bukkit
 import org.bukkit.World
+import org.bukkit.WorldCreator
 import java.io.File
 
 /**
@@ -28,13 +29,27 @@ fun createBuildingWorld(
     name: String,
 ) = WorldBuilder(name, WorldGenerationTypes.VOID, World.Environment.NORMAL, true).build()
 
-
 /**
  * @return true if the given file is a world folder. False if not.
  */
 fun File.isWorldContainer(): Boolean {
     val lockFile = File(this, "session.lock")
     return lockFile.exists()
+}
+
+/**
+ * @return true if the given string is a world folder. False if not.
+ */
+fun String.isWorldContainer(): Boolean {
+    val possibleWorldContainers = Bukkit.getWorldContainer().listFiles() ?: return false
+
+    for (file in possibleWorldContainers) {
+        if (!file.isWorldContainer()) continue
+        if (file.name != this) continue
+        return true
+    }
+
+    return false
 }
 
 /**
@@ -53,3 +68,12 @@ val existingWorlds: Set<String>
 
         return result
     }
+
+/**
+ * Will load the world by the given string.
+ * @return a nullable world.
+ */
+fun String.loadAsWorld(): World? {
+    if (this.isWorldContainer()) return null
+    return Bukkit.getWorld(this) ?: Bukkit.createWorld(WorldCreator(this))
+}
