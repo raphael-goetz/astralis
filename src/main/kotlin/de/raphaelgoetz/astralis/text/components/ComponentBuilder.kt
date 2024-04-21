@@ -31,7 +31,6 @@ inline fun adventureMessage(
     builder: ComponentBuilder.() -> Unit = {}
 ) = ComponentBuilder(text).apply(builder).build()
 
-
 /**
  * @param input is the default text that the component is build on
  */
@@ -97,7 +96,7 @@ class ComponentBuilder(private val input: String) {
 
     var resolver: Array<out TagResolver>? = null
 
-    fun build(): Component {
+    fun build(): AdventureMessage {
 
         var textComponent =
             if (resolver == null) MiniMessage.miniMessage().deserialize(input)
@@ -115,6 +114,6 @@ class ComponentBuilder(private val input: String) {
             textComponent = Component.text(it.icon).append(textComponent)
         }
 
-        return textComponent.style(styleBuilder).asComponent()
+        return AdventureMessage(textComponent.style(styleBuilder).asComponent(), type?.sound)
     }
 }
