@@ -24,6 +24,11 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 inline fun adventureText(
     text: String,
     builder: ComponentBuilder.() -> Unit = {}
+) = adventureMessage(text, builder).component
+
+inline fun adventureMessage(
+    text: String,
+    builder: ComponentBuilder.() -> Unit = {}
 ) = ComponentBuilder(text).apply(builder).build()
 
 
