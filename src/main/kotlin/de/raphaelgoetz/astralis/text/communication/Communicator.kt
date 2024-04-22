@@ -19,7 +19,7 @@ fun Player.sendText(
 
 /**
  * Sends the player a component & plays a sound at the same time
- * @param adventureMessage is the component wrapper that contains the styled component and the message
+ * @param adventureMessage is the component wrapper that contains the styled component and the sound
  */
 fun Player.sendText(adventureMessage: AdventureMessage) {
     this.sendMessage(adventureMessage.component)
