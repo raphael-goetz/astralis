@@ -70,26 +70,29 @@ class TitleBuilder(
         }
     }
 
-    var tagResolver: Array<TagResolver>? = null
+    var resolver: Array<TagResolver>? = null
     var type: CommunicationType? = null
 
     var duration: Long = 3
 
-    fun build(): Title {
+    fun build(): AdventureTitle {
         val titleComponent = adventureText(title) {
+            resolver = this@TitleBuilder.resolver
             type = this@TitleBuilder.type
             if (this@TitleBuilder.currentStyles[TitleType.UP].isNullOrEmpty()) return@adventureText
             currentStyles = this@TitleBuilder.currentStyles[TitleType.UP]!!
         }
 
         val subtitleComponent = adventureText(subTitle) {
+            resolver = this@TitleBuilder.resolver
             type = CommunicationType.NONE
             if (this@TitleBuilder.currentStyles[TitleType.DOWN].isNullOrEmpty()) return@adventureText
             currentStyles = this@TitleBuilder.currentStyles[TitleType.DOWN]!!
         }
 
         val time = Times.times(Duration.ZERO, Duration.ofSeconds(duration), Duration.ZERO)
-        return Title.title(titleComponent, subtitleComponent, time)
+        val title = Title.title(titleComponent, subtitleComponent, time)
+        return AdventureTitle(title, type?.sound)
     }
 
 }

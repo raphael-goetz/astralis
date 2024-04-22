@@ -3,7 +3,9 @@ package de.raphaelgoetz.astralis.text.communication
 import de.raphaelgoetz.astralis.text.components.AdventureMessage
 import de.raphaelgoetz.astralis.text.components.ComponentBuilder
 import de.raphaelgoetz.astralis.text.components.adventureMessage
+import de.raphaelgoetz.astralis.text.title.AdventureTitle
 import de.raphaelgoetz.astralis.text.title.TitleBuilder
+import de.raphaelgoetz.astralis.text.title.adventureTitle
 
 import org.bukkit.entity.Player
 
@@ -26,19 +28,23 @@ fun Player.sendText(adventureMessage: AdventureMessage) {
     adventureMessage.sound?.let { sound -> this.playSound(this, sound, 1f, 1f) }
 }
 
-fun Player.sendTitle(
-    title: String,
-    subTitle: String,
-    builder: TitleBuilder.() -> Unit = {}
-) {
-    val titleBuilder = TitleBuilder(title, subTitle)
-    titleBuilder.builder()
-    val message = titleBuilder.build()
-    this.showTitle(message)
-    titleBuilder.type?.sound?.let { this.playSound(this, it, 1f, 1f) }
+/**
+ * Sends the player a title & plays a sound at the same time
+ * @param adventureTitle is the title wrapper that contains the styled title and the sound
+ */
+fun Player.sendTitle(adventureTitle: AdventureTitle) {
+    this.showTitle(adventureTitle.title)
+    adventureTitle.sound?.let { sound -> this.playSound(this, sound, 1f, 1f) }
 }
 
+/**
+ * Sends the player a title & plays a sound at the same time
+ * @param title is the content of the upper title
+ * @param subTitle is the content of the lower title
+ * @param builder is the TitleBuilder which contains the sound and the styling
+ */
 fun Player.sendTitle(
     title: String,
+    subTitle: String = "",
     builder: TitleBuilder.() -> Unit = {}
-) = this.sendTitle(title, "", builder)
+) = this.sendTitle(adventureTitle(title, subTitle, builder))
