@@ -7,13 +7,20 @@ import de.raphaelgoetz.astralis.text.components.ComponentBuilder
 import de.raphaelgoetz.astralis.text.components.adventureText
 import net.kyori.adventure.text.Component
 
-class SmartLoreBuilder {
+/**
+ * @param description is a possible lists of Components, if the lore of the current item should be edited
+ */
+class SmartLoreBuilder(
+    private val description: MutableList<Component> = mutableListOf()
+) {
 
-    private val description = mutableListOf<Component>()
+    fun removeLast() = description.removeLast()
 
-    fun addLore(component: Component) {
-        description.add(component)
-    }
+    fun addFirst(component: Component) = description.addFirst(component)
+
+    fun addLast(component: Component) = description.addLast(component)
+
+    fun addLore(component: Component) = description.add(component)
 
     fun addLore(
         text: String,
