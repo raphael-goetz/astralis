@@ -1,4 +1,4 @@
-package de.raphaelgoetz.astralis.task
+package de.raphaelgoetz.astralis.schedule
 
 import de.raphaelgoetz.astralis.annotations.InternalUse
 import kotlinx.coroutines.CoroutineScope

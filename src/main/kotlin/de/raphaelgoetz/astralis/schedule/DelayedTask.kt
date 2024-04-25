@@ -1,4 +1,4 @@
-package de.raphaelgoetz.astralis.task
+package de.raphaelgoetz.astralis.schedule
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
