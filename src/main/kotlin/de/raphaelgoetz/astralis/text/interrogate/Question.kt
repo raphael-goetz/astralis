@@ -2,7 +2,7 @@ package de.raphaelgoetz.astralis.text.interrogate
 
 import de.raphaelgoetz.astralis.event.listen
 import de.raphaelgoetz.astralis.event.unregister
-import de.raphaelgoetz.astralis.task.doLater
+import de.raphaelgoetz.astralis.schedule.doLater
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
 import de.raphaelgoetz.astralis.text.communication.sendText
 import de.raphaelgoetz.astralis.text.components.AdventureMessage

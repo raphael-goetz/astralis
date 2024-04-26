@@ -16,9 +16,9 @@ class SmartLoreBuilder(
 
     fun removeLast() = description.removeLast()
 
-    fun addFirst(component: Component) = description.addFirst(component)
+    fun insertFirst(component: Component) = description.addFirst(component)
 
-    fun addLast(component: Component) = description.addLast(component)
+    fun insertLast(component: Component) = description.addLast(component)
 
     fun addLore(component: Component) = description.add(component)
 

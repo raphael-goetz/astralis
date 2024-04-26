@@ -2,7 +2,7 @@ package de.raphaelgoetz.astralis.world.data
 
 import de.raphaelgoetz.astralis.event.listen
 import de.raphaelgoetz.astralis.event.unregister
-import de.raphaelgoetz.astralis.task.doLater
+import de.raphaelgoetz.astralis.schedule.doLater
 import de.raphaelgoetz.astralis.world.generator.VoidGenerator
 import org.bukkit.Difficulty
 import org.bukkit.GameRule
