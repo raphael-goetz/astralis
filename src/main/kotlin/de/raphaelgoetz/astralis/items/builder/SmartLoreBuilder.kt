@@ -38,15 +38,16 @@ class SmartLoreBuilder(
  * @param input is the text that will be converted
  */
 fun smartestLoreBuilder(input: String): List<Component> {
-    val strings = input.split(" ")
+    if (input.isEmpty()) return emptyList()
 
-    if (strings.isEmpty()) return emptyList()
-    if (strings.size > 7) return listOf(input.stringToStyledLore())
+    val strings = input.split(" ")
+    if (strings.size <= 7) return listOf(input.stringToStyledLore())
     val subList = Lists.partition(strings, 6)
     val result = mutableListOf<Component>()
 
     subList.forEach { list ->
-        result.add(list.toString().stringToStyledLore())
+        val alreadyAString = buildString { list.forEach { append("$it ") } }
+        result.add(alreadyAString.stringToStyledLore())
     }
 
     return result

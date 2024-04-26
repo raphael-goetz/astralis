@@ -40,6 +40,7 @@ inline fun <reified T : ItemMeta> ItemStack.applyMeta(
         resolver = tagResolver.toTypedArray()
     })
 
-    meta.lore(smartestLoreBuilder(description))
+    val currentDescription = smartestLoreBuilder(description)
+    if (currentDescription.isNotEmpty()) meta.lore(currentDescription)
     this.itemMeta = meta
 }
