@@ -15,7 +15,7 @@ import java.util.function.Consumer
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class InventoryBuilder(
+open class InventoryBuilder(
     javaPlugin: JavaPlugin,
     title: Component,
     private val holder: Player,
@@ -33,10 +33,12 @@ class InventoryBuilder(
 
     fun open() = holder.openInventory(inventory)
 
-    fun setSlot(slot: InventorySlots, item: SmartItem, action: Consumer<InventoryClickEvent>?) {
-        if (action != null) this.clickEvents[slot.value] = SmartClick(item, action)
-        inventory.setItem(slot.value, item.itemStack)
+    fun setSlot(slot: Int, item: SmartItem, action: Consumer<InventoryClickEvent>?) {
+        if (action != null) this.clickEvents[slot] = SmartClick(item, action)
+        inventory.setItem(slot, item.itemStack)
     }
+
+    fun setSlot(slot: InventorySlots, item: SmartItem, action: Consumer<InventoryClickEvent>?) = setSlot(slot.value, item, action)
 
     fun setSlot(slot: InventorySlots, item: SmartItem) = setSlot(slot, item, null)
 
