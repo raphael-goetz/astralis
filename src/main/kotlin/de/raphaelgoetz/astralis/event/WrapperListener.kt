@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * A wrapper that contains the event and the listener.
- * @returns the created listener
+ * @returns the created listener.
  */
 @InternalUse
 abstract class WrapperListener<T: Event> (

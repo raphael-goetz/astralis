@@ -2,7 +2,7 @@ package de.raphaelgoetz.astralis
 
 import org.bukkit.plugin.java.JavaPlugin
 
-class Astralis : JavaPlugin() {
+object Astralis : JavaPlugin() {
 
     override fun onLoad() {}
 

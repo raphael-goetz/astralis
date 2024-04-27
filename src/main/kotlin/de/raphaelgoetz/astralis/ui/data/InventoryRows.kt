@@ -1,8 +1,8 @@
 package de.raphaelgoetz.astralis.ui.data
 
 /**
- *  Placeholder for default inventory-rows
- *  @param value is the corresponding inventory size
+ *  Placeholder for default inventory-rows.
+ *  @param value is the corresponding inventory size.
  */
 enum class InventoryRows(val value: Int) {
     ROW1(9),

@@ -14,11 +14,11 @@ import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
- * @param questionMessage is the message the player will receive when the function is called
- * @param timeoutMessage is the message that the player will receive when the time is over
- * @param timeout is the time in milliseconds, that the player has time to answer
+ * @param questionMessage is the message the player will receive when the function is called.
+ * @param timeoutMessage is the message that the player will receive when the time is over.
+ * @param timeout is the time in milliseconds, that the player has time to answer.
  * @param onAnswerReceived is the function that will be executed if the player answers or the timeout will be called.
- * It contains a boolean which correspond to the player having send an answer or not
+ * It contains a boolean which correspond to the player having send an answer or not.
  */
 inline fun Player.interrogate(
     javaPlugin: JavaPlugin,

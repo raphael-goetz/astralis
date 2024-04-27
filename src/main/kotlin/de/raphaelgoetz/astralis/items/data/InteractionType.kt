@@ -4,9 +4,9 @@ import de.raphaelgoetz.astralis.ux.color.Colorization
 import org.bukkit.Sound
 
 /**
- * Container for styling and sound. Used for better ux
- * @param color is the color the display-name gets colored in
- * @param sound is the sound the user will get when clicking
+ * Container for styling and sound. Used for better ux.
+ * @param color is the color the display-name gets colored in.
+ * @param sound is the sound the user will get when clicking.
  */
 enum class InteractionType(val color: Colorization, val sound: Sound) {
     SUCCESS(Colorization.LIME, Sound.ENTITY_EXPERIENCE_ORB_PICKUP),

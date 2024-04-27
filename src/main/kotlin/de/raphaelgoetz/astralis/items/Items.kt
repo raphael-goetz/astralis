@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 
 /**
- * Will create a SmartItem used for building an inventory
- * @param name is the String which gets used for the display-name
- * @param material is the Material of the resulting ItemStack
- * @param description is the String which gets used for the lore
- * @param tagResolver are possible resolvers for placeholder
- * @param interactionType is the container of styling & sound
- * @param builder contains the itemMeta properties which are getting applied
+ * Will create a SmartItem used for building an inventory.
+ * @param name is the String which gets used for the display-name.
+ * @param material is the Material of the resulting ItemStack.
+ * @param description is the String which gets used for the lore.
+ * @param tagResolver are possible resolvers for placeholder.
+ * @param interactionType is the container of styling & sound.
+ * @param builder contains the itemMeta properties which are getting applied.
  * @see SmartItem
  */
 inline fun <reified T : ItemMeta> smartItem(
@@ -35,6 +35,19 @@ inline fun <reified T : ItemMeta> smartItem(
  * Will create a ItemStack
  * @param material is the Material of the resulting ItemStack
  * @param builder contains the itemMeta properties which will be applied
+ * Will create a SmartItem used for building an inventory.
+ * @param name is the String which gets used for the display-name.
+ * @param material is the Material of the resulting ItemStack.
+ * @param description is the String which gets used for the lore.
+ * @param tagResolver are possible resolvers for placeholder.
+ * @param interactionType is the container of styling & sound.
+ * @param builder contains the itemMeta properties which are getting applied.
+ * @see SmartItem
+ */
+/**
+ * Will create a ItemStack.
+ * @param material is the Material of the resulting ItemStack.
+ * @param builder contains the itemMeta properties which will be applied.
  */
 inline fun <reified T : ItemMeta> basicItem(
     material: Material,
@@ -46,3 +59,9 @@ inline fun <reified T : ItemMeta> basicItem(
     itemStack.itemMeta = meta
     return itemStack
 }
+
+/**
+ * Will create a ItemStack.
+ * @param material is the Material of the resulting ItemStack.
+ * @param builder contains the itemMeta properties which will be applied.
+ */

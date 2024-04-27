@@ -16,23 +16,29 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
  */
 
 /**
- * @param text is the default text that the component is build on
- * @param builder is the builder to style the component
+ * @param text is the default text that the component is build on.
+ * @param builder is the builder to style the component.
  * @see ComponentBuilder
- * @return an adventure component
+ * @return an adventure component.
  */
 inline fun adventureText(
     text: String,
     builder: ComponentBuilder.() -> Unit = {}
 ) = adventureMessage(text, builder).component
 
+/**
+ * Creates a AdventureMessage (wrapper that contains a component & communication-type)
+ * @param text of the message.
+ * @param builder that contains the properties of the message.
+ * @return the created AdventureMessage.
+ */
 inline fun adventureMessage(
     text: String,
     builder: ComponentBuilder.() -> Unit = {}
 ) = ComponentBuilder(text).apply(builder).build()
 
 /**
- * @param input is the default text that the component is build on
+ * @param input is the default text that the component is build on.
  */
 @InternalUse
 class ComponentBuilder(private val input: String) {
@@ -40,9 +46,9 @@ class ComponentBuilder(private val input: String) {
     var currentStyles = mutableSetOf<TextDecoration>()
 
     /**
-     * @see TextDecoration for available text decorations
-     * possible are: italic, bold, strikethrough, underlined, obfuscated
-     * @param enabled turns the decoration on/off
+     * @see TextDecoration for available text decorations.
+     * possible are: italic, bold, strikethrough, underlined, obfuscated.
+     * @param enabled turns the decoration on/off.
      */
     fun italic(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.ITALIC)

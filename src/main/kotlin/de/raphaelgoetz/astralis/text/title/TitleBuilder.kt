@@ -12,10 +12,10 @@ import net.kyori.adventure.title.Title.Times
 import java.time.Duration
 
 /**
- * Will create a styled adventure Title
- * @param title is the upper text of the title
- * @param subtitle is the lower text of the title
- * @param builder is the builder to style the title
+ * Will create a styled adventure Title.
+ * @param title is the upper text of the title.
+ * @param subtitle is the lower text of the title.
+ * @param builder is the builder to style the title.
  * @return an adventure Title
  */
 inline fun adventureTitle(

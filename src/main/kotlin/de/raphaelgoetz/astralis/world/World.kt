@@ -9,11 +9,11 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 /**
- * Creates a normal world
- * @param name is the name of the world
+ * Creates a normal world.
+ * @param name is the name of the world which will be created.
  * @param generationTypes is the generation of the world.
- * @param environment is the environment of the created world. Possible are Normal, Nether, End
- * @return the world object
+ * @param environment is the environment of the created world. Possible are Normal, Nether, End.
+ * @return the world object.
  */
 fun createWorld(
     javaPlugin: JavaPlugin,
@@ -24,8 +24,8 @@ fun createWorld(
 
 /**
  * Creates a world that's specifically for building. (Game rules may be differed from normal. Is always a void gen)
- * @param name is the name of the world
- * @return the world object
+ * @param name is the name of the world which will be created.
+ * @return the world object.
  */
 fun createBuildingWorld(
     javaPlugin: JavaPlugin,

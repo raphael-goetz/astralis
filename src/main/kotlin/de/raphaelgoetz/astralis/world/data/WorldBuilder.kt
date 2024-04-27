@@ -11,6 +11,13 @@ import org.bukkit.WorldCreator
 import org.bukkit.event.world.WorldLoadEvent
 import org.bukkit.plugin.java.JavaPlugin
 
+/**
+ * Builder for creating setup worlds. Specifically worlds to build in.
+ * @param name is the Name of the world.
+ * @param generationTypes is the type of world-generator (includes vanilla and void).
+ * @param environment is the environment of the world like nether or end.
+ * @param isBuildingWorld
+ */
 data class WorldBuilder(
     val javaPlugin: JavaPlugin,
     val name: String,
@@ -37,6 +44,10 @@ data class WorldBuilder(
 
 private fun applyGameRules(javaPlugin: JavaPlugin, name: String) {
     val loadEvent = listen<WorldLoadEvent>(javaPlugin) { event ->
+/**
+ * Applies predefined game-rules and world settings for a building-world.
+ * @param name is the name of the world that the rules will be applied on.
+ */
         if (event.world.name != name) return@listen
         val world = event.world
 

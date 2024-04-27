@@ -12,6 +12,7 @@ private val tasks: HashMap<UUID, Timer> = hashMapOf()
 /**
  * @param delay is the time after which the given function gets executed.
  * @param period is the time between each function call.
+ * @param taskTimeTypes is the time converter. Output in milliseconds.
  * @param function is the function that gets called.
  * It contains an integer that will be incremented after every execution.
  * It's main purpose is to count how many times the given function has been called.
@@ -26,6 +27,7 @@ inline fun doAgain(
 /**
  * @param delay is the time after which the given function gets executed.
  * @param period is the time between each function call.
+ * @param taskTimeTypes is the time converter. Output in milliseconds.
  * @param function is the function that gets called.
  * It contains an integer that will be incremented after every execution.
  * It's main purpose is to count how many times the given function has been called.
@@ -39,8 +41,19 @@ inline fun doAgainAsync(
 
 fun stopTask(uuid: UUID) {
     tasks.remove(uuid)
+/**
+ * Stops an repeating task.
+ * @param uuid of the task that will be stopped.
+ */
 }
 
+/**
+ * Builder for RepeatingTasks.
+ * @param async when true, function will be executed async.
+ * @param delay of the task (time to wait util the task starts).
+ * @param period of the task (time after the task gets repeated).
+ * @param function that will be executed. Contains an integer which tells the current iteration.
+ */
 @InternalUse
 data class RepeatTaskBuilder(
     private val async: Boolean,

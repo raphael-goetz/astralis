@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 
 /**
  * @param function is the function that gets called.
- * The given function will be called synchronous
+ * The given function will be called synchronous.
  */
 inline fun doNow(
     function: () -> Unit = {}
@@ -13,12 +13,17 @@ inline fun doNow(
 
 /**
  * @param function is the function that gets called.
- * The given function will be called asynchronous
+ * The given function will be called asynchronous.
  */
 inline fun doNowAsync(
     function: () -> Unit = {}
 ) = TaskBuilder(true).apply { function() }.execute()
 
+/**
+ * Builder for creating sync/async tasks.
+ * @param async if true, the function will be called async.
+ * @param function that will be executed once.
+ */
 @InternalUse
 class TaskBuilder(
     private val async: Boolean = false,

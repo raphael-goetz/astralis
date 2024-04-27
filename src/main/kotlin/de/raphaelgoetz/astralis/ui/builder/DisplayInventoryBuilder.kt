@@ -10,6 +10,15 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 
+/**
+ * Builder for the page-inventory.
+ * @param title of the inventory.
+ * @param holder of the current inventory.
+ * @param rows of the inventory. Used InventoryRows as easier way then doing 5*9 or something.
+ * @param list of the items to display.
+ * @param from (starting point) to display the items inside the list.
+ * @param to (ending point, inclusive) to display the items inside the list.
+ */
 class DisplayInventoryBuilder(
     javaPlugin: JavaPlugin,
     title: Component,
@@ -42,6 +51,11 @@ class DisplayInventoryBuilder(
         }
     }
 
+    /**
+     * Sets the item to change the page to the left.
+     * @param slot where the item gets set.
+     * @param display of the item for page-changing.
+     */
     fun pageLeft(slot: InventorySlots, display: ItemStack) {
         this.setBlockedSlot(slot, SmartItem(display, InteractionType.PAGE_TURN)) {
             if (currentPageIndex - 1 < 0) {
@@ -54,6 +68,11 @@ class DisplayInventoryBuilder(
         }
     }
 
+    /**
+     * Sets the item to change the page to the right.
+     * @param slot where the item gets set.
+     * @param display of the item for page-changing.
+     */
     fun pageRight(slot: InventorySlots, display: ItemStack) {
         this.setBlockedSlot(slot, SmartItem(display, InteractionType.PAGE_TURN)) {
             if (currentPageIndex + 1 >= maxPage) {

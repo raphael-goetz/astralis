@@ -1,8 +1,8 @@
 package de.raphaelgoetz.astralis.ui.data
 
 /**
-*  Placeholder for default inventory-slot
-*  @param value is the corresponding inventory slot
+*  Placeholder for default inventory-slot.
+*  @param value is the corresponding inventory slot.
 */
 enum class InventorySlots(val value: Int) {
     SLOT1ROW1(0),

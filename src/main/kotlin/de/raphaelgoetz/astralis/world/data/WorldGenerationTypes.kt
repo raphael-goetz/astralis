@@ -5,7 +5,7 @@ import org.bukkit.WorldCreator
 import org.bukkit.WorldType
 
 /**
- * Generation type wrapper to contain the void generation option
+ * Generation type wrapper to contain the void generation option.
  */
 enum class WorldGenerationTypes {
     VOID,
@@ -16,7 +16,7 @@ enum class WorldGenerationTypes {
 }
 
 /**
- * Modifies the given world-creator to generate the given type. This is to accomplish an void generator.
+ * Modifies the given world-creator to generate the given type to accomplish a void generator.
  * @param worldGenerationTypes is the type of the world-generator.
  * @return the modified WorldCreator that was given.
  */

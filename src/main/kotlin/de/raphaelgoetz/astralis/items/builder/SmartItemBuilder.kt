@@ -8,9 +8,9 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 
 /**
- * Wrapper that contains the user-feedback and the corresponding item
- * @param itemStack is the item which gets styled after the InteractionType
- * @param interactionType contains styling and the sound
+ * Wrapper that contains the user-feedback and the corresponding item.
+ * @param itemStack is the item which gets styled after the InteractionType.
+ * @param interactionType contains styling and the sound.
  */
 data class SmartItem(
     val itemStack: ItemStack,
@@ -18,12 +18,12 @@ data class SmartItem(
 )
 
 /**
- * Applies the given itemMeta to the given ItemStack
- * @param name is the String which gets used for the display-name
- * @param description is the String which gets used for the lore
- * @param tagResolver are possible resolvers for placeholder
- * @param interactionType is the container of styling & sound
- * @param builder contains the itemMeta properties which are getting applied
+ * Applies the given itemMeta to the given ItemStack.
+ * @param name is the String which gets used for the display-name.
+ * @param description is the String which gets used for the lore.
+ * @param tagResolver are possible resolvers for placeholder.
+ * @param interactionType is the container of styling & sound.
+ * @param builder contains the itemMeta properties which are getting applied.
  */
 @InternalUse
 inline fun <reified T : ItemMeta> ItemStack.applyMeta(
