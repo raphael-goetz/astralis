@@ -41,6 +41,15 @@ inline fun <reified T : ItemMeta> smartItem(
  * @param builder contains the itemMeta properties which are getting applied.
  * @see SmartItem
  */
+inline fun smartItem(
+    name: String,
+    material: Material,
+    description: String = "",
+    tagResolver: List<TagResolver> = emptyList(),
+    interactionType: InteractionType = InteractionType.CLICK,
+    builder: ItemMeta.() -> Unit = {}
+): SmartItem = smartItem<ItemMeta>(name, material, description, tagResolver, interactionType, builder)
+
 /**
  * Will create a ItemStack.
  * @param material is the Material of the resulting ItemStack.
@@ -49,7 +58,7 @@ inline fun <reified T : ItemMeta> smartItem(
 inline fun <reified T : ItemMeta> basicItem(
     material: Material,
     builder: T.() -> Unit = {}
-) : ItemStack {
+): ItemStack {
     val itemStack = ItemStack(material)
     val meta = itemStack.itemMeta as T
     meta.apply(builder)
@@ -62,3 +71,5 @@ inline fun <reified T : ItemMeta> basicItem(
  * @param material is the Material of the resulting ItemStack.
  * @param builder contains the itemMeta properties which will be applied.
  */
+inline fun basicItem(material: Material, builder: ItemMeta.() -> Unit = {}): ItemStack =
+    basicItem<ItemMeta>(material, builder)
