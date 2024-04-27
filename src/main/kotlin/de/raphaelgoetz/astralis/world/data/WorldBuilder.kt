@@ -19,7 +19,6 @@ import org.bukkit.plugin.java.JavaPlugin
  * @param isBuildingWorld
  */
 data class WorldBuilder(
-    val javaPlugin: JavaPlugin,
     val name: String,
     val generationTypes: WorldGenerationTypes,
     val environment: World.Environment,
@@ -35,19 +34,19 @@ data class WorldBuilder(
         if (isBuildingWorld) {
             worldGenerator.generateStructures(false)
             worldGenerator.generator(VoidGenerator())
-            applyGameRules(javaPlugin, name)
+            applyGameRules(name)
         }
 
         return worldGenerator.createWorld()
     }
 }
 
-private fun applyGameRules(javaPlugin: JavaPlugin, name: String) {
-    val loadEvent = listen<WorldLoadEvent>(javaPlugin) { event ->
 /**
  * Applies predefined game-rules and world settings for a building-world.
  * @param name is the name of the world that the rules will be applied on.
  */
+private fun applyGameRules(name: String) {
+    val loadEvent = listen<WorldLoadEvent> { event ->
         if (event.world.name != name) return@listen
         val world = event.world
 

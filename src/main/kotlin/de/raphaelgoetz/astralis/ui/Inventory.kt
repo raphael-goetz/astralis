@@ -16,11 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin
  * @param builder for the inventory properties. Contains methods for setting/adding/removing items.
  */
 inline fun Player.createInventory(
-    javaPlugin: JavaPlugin,
     title: Component,
     rows: InventoryRows = InventoryRows.ROW6,
     crossinline builder: InventoryBuilder.() -> Unit = {}
-) = InventoryBuilder(javaPlugin, title, this, rows).apply(builder)
+) = InventoryBuilder(title, this, rows).apply(builder)
 
 /**
  * Creates an inventory for a specific player and automatically opens it.
@@ -29,11 +28,10 @@ inline fun Player.createInventory(
  * @param builder for the inventory properties. Contains methods for setting/adding/removing items.
  */
 inline fun Player.openInventory(
-    javaPlugin: JavaPlugin,
     title: Component,
     rows: InventoryRows = InventoryRows.ROW6,
     crossinline builder: InventoryBuilder.() -> Unit = {}
-) = createInventory(javaPlugin, title, rows, builder).open()
+) = createInventory(title, rows, builder).open()
 
 /**
  * Creates a page-inventory for a specific player.
@@ -45,14 +43,13 @@ inline fun Player.openInventory(
  * @param builder for the inventory properties. Contains methods for setting/adding/removing items.
  */
 inline fun Player.createPageInventory(
-    javaPlugin: JavaPlugin,
     title: Component,
     rows: InventoryRows = InventoryRows.ROW6,
     list: List<SmartClick> = emptyList(),
     from: InventorySlots = InventorySlots.SLOT1ROW1,
     to: InventorySlots = InventorySlots.SLOT9ROW6,
     crossinline builder: DisplayInventoryBuilder.() -> Unit = {}
-) = DisplayInventoryBuilder(javaPlugin, title, this, rows, list, from, to).apply(builder)
+) = DisplayInventoryBuilder(title, this, rows, list, from, to).apply(builder)
 
 /**
  * Creates a page-inventory for a specific player and automatically opens it.
@@ -64,11 +61,10 @@ inline fun Player.createPageInventory(
  * @param builder for the inventory properties. Contains methods for setting/adding/removing items.
  */
 inline fun Player.openPageInventory(
-    javaPlugin: JavaPlugin,
     title: Component,
     rows: InventoryRows = InventoryRows.ROW6,
     list: List<SmartClick> = emptyList(),
     from: InventorySlots = InventorySlots.SLOT1ROW1,
     to: InventorySlots = InventorySlots.SLOT9ROW6,
     crossinline builder: DisplayInventoryBuilder.() -> Unit = {}
-) = DisplayInventoryBuilder(javaPlugin, title, this, rows, list, from, to).apply(builder).open()
+) = DisplayInventoryBuilder(title, this, rows, list, from, to).apply(builder).open()

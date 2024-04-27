@@ -22,7 +22,6 @@ import kotlin.collections.HashMap
  * @param rows of the inventory. Used InventoryRows as easier way then doing 5*9 or something.
  */
 open class InventoryBuilder(
-    javaPlugin: JavaPlugin,
     title: Component,
     private val holder: Player,
     rows: InventoryRows = InventoryRows.ROW6,
@@ -132,7 +131,7 @@ open class InventoryBuilder(
     }
 
     init {
-        listen<InventoryClickEvent>(javaPlugin) { inventoryClickEvent ->
+        listen<InventoryClickEvent> { inventoryClickEvent ->
             if (inventoryClickEvent.whoClicked !is Player) return@listen
             if (inventoryClickEvent.clickedInventory == null) return@listen
             if (inventoryClickEvent.currentItem == null) return@listen

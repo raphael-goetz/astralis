@@ -21,7 +21,6 @@ import org.bukkit.plugin.java.JavaPlugin
  * It contains a boolean which correspond to the player having send an answer or not.
  */
 inline fun Player.interrogate(
-    javaPlugin: JavaPlugin,
     questionMessage: AdventureMessage = adventureMessage("Please type your answer in the chat!") {
         type = CommunicationType.INFO
     },
@@ -35,7 +34,7 @@ inline fun Player.interrogate(
     var message: Component? = null
 
     this.sendText(questionMessage)
-    val event = this.listen<AsyncChatEvent>(javaPlugin) { asyncChatEvent ->
+    val event = this.listen<AsyncChatEvent> { asyncChatEvent ->
         message = asyncChatEvent.message()
         onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
     }

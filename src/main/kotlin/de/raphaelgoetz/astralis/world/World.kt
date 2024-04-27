@@ -16,11 +16,10 @@ import java.io.File
  * @return the world object.
  */
 fun createWorld(
-    javaPlugin: JavaPlugin,
     name: String,
     generationTypes: WorldGenerationTypes = WorldGenerationTypes.NORMAL,
     environment: World.Environment = World.Environment.NORMAL,
-) = WorldBuilder(javaPlugin, name, generationTypes, environment, false).build()
+) = WorldBuilder(name, generationTypes, environment, false).build()
 
 /**
  * Creates a world that's specifically for building. (Game rules may be differed from normal. Is always a void gen)
@@ -28,9 +27,8 @@ fun createWorld(
  * @return the world object.
  */
 fun createBuildingWorld(
-    javaPlugin: JavaPlugin,
     name: String,
-) = WorldBuilder(javaPlugin, name, WorldGenerationTypes.VOID, World.Environment.NORMAL, true).build()
+) = WorldBuilder(name, WorldGenerationTypes.VOID, World.Environment.NORMAL, true).build()
 
 /**
  * @return true if the given file is a world folder. False if not.

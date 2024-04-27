@@ -20,14 +20,13 @@ import org.bukkit.plugin.java.JavaPlugin
  * @param to (ending point, inclusive) to display the items inside the list.
  */
 class DisplayInventoryBuilder(
-    javaPlugin: JavaPlugin,
     title: Component,
     holder: Player,
     rows: InventoryRows = InventoryRows.ROW6,
     list: List<SmartClick>,
     private val from: InventorySlots,
     private val to: InventorySlots
-) : InventoryBuilder(javaPlugin, title, holder, rows) {
+) : InventoryBuilder(title, holder, rows) {
 
     //to should be inclusive. That's why to + 1
     private val maxItems: Int = (to.value + 1) - from.value

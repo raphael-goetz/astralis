@@ -24,20 +24,20 @@ abstract class WrapperListener<T: Event> (
  * Registers the event from the given WrapperListener.
  */
 @InternalUse
-inline fun <reified T: Event> WrapperListener<T>.subscribe(javaPlugin: JavaPlugin) =
+inline fun <reified T: Event> WrapperListener<T>.subscribe() =
     Bukkit.getPluginManager().registerEvent(T::class.java, this, priority, { _, event ->
         if (event is T) {
             onEvent(event)
         }
-    }, javaPlugin)
+    }, Astralis)
 
 /**
  * Registers the player-event only for a specific player from the given WrapperListener.
  */
 @InternalUse
-inline fun <reified T: PlayerEvent> WrapperListener<T>.subscribeForPlayer(javaPlugin: JavaPlugin, player: Player) =
+inline fun <reified T: PlayerEvent> WrapperListener<T>.subscribeForPlayer(player: Player) =
     Bukkit.getPluginManager().registerEvent(T::class.java, this, priority, { _, event ->
         if (event is T && event.player.uniqueId == player.uniqueId) {
             onEvent(event)
         }
-    }, javaPlugin)
+    }, Astralis)

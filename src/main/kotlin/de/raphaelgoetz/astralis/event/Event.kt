@@ -21,7 +21,6 @@ fun Listener.unregister() = HandlerList.unregisterAll(this)
  * @return the created listener.
  */
 inline fun <reified T : Event> listen(
-    plugin: JavaPlugin,
     priority: EventPriority = EventPriority.NORMAL,
     crossinline onEvent: (event: T) -> Unit,
 ): Listener {
@@ -30,7 +29,7 @@ inline fun <reified T : Event> listen(
         override fun onEvent(event: T) = onEvent.invoke(event)
     }
 
-    wrapper.subscribe(plugin)
+    wrapper.subscribe()
     return wrapper
 }
 
@@ -42,7 +41,6 @@ inline fun <reified T : Event> listen(
  * @return the created listener.
  */
 inline fun <reified T : PlayerEvent> Player.listen(
-    plugin: JavaPlugin,
     priority: EventPriority = EventPriority.NORMAL,
     crossinline onEvent: (event: T) -> Unit,
 ): Listener {
@@ -51,7 +49,7 @@ inline fun <reified T : PlayerEvent> Player.listen(
         override fun onEvent(event: T) = onEvent.invoke(event)
     }
 
-    wrapper.subscribeForPlayer(plugin, this)
+    wrapper.subscribeForPlayer(this)
     return wrapper
 }
 
@@ -73,10 +71,9 @@ inline fun <reified T : Event> listenCancelled(eventPriority: EventPriority = Ev
  * @return the created listener.
  */
 inline fun ItemStack.listenClick(
-    plugin: JavaPlugin,
     priority: EventPriority = EventPriority.NORMAL,
     crossinline onEvent: (event: InventoryClickEvent) -> Unit,
-) = listen<InventoryClickEvent>(plugin, priority) { event ->
+) = listen<InventoryClickEvent>(priority) { event ->
     if (event.clickedInventory == this) onEvent.invoke(event)
 }
 
@@ -87,9 +84,8 @@ inline fun ItemStack.listenClick(
  * @return the created listener.
  */
 inline fun ItemStack.listenInteract(
-    plugin: JavaPlugin,
     priority: EventPriority = EventPriority.NORMAL,
     crossinline onEvent: (event: PlayerInteractEvent) -> Unit
-) = listen<PlayerInteractEvent>(plugin, priority) { event ->
+) = listen<PlayerInteractEvent>(priority) { event ->
     if (event.item == this) onEvent.invoke(event)
 }
