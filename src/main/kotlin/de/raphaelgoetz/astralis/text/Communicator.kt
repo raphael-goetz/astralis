@@ -52,3 +52,50 @@ fun Player.sendTitle(
     subTitle: String = "",
     builder: TitleBuilder.() -> Unit = {}
 ) = this.sendTitle(adventureTitle(title, subTitle, builder))
+
+/**
+ * Sends an actionbar infinite. Therefore, creating a task to repeat sending the actionbar.
+ * @param component that will be sent as action-bar.
+ */
+fun Player.showActionbar(component: Component) {
+    doAgainAsync(0, 3) {
+        this@showActionbar.sendActionBar(component)
+    }
+}
+
+/**
+ * Sends an actionbar infinite. Therefore, creating a task to repeat sending the actionbar.
+ * @param text that will be sent as action-bar.
+ * @param builder that will style the text by the given properties.
+ */
+inline fun Player.showActionbar(
+    text: String,
+    crossinline builder: ComponentBuilder.() -> Unit = {}
+) = this.showActionbar(adventureText(text, builder))
+
+/**
+ * Sends an actionbar infinite. Therefore, creating a task to repeat sending the actionbar.
+ * @param textList list of components that will be switched after one sending.
+ */
+fun Player.showActionBars(textList: List<Component>) {
+    var textIndex = 0
+
+    doAgain(0, 3) {
+        if (textIndex >= textList.size) textIndex = 0
+        this@showActionBars.sendActionBar(textList[textIndex])
+        textIndex++
+    }
+}
+
+/**
+ * Sends an actionbar infinite. Therefore, creating a task to repeat sending the actionbar.
+ * @param textList list of strings that will be switched after one sending.
+ * @param builder that will style the text by the given properties.
+ */
+inline fun Player.sendActionBars(
+    textList: List<String>,
+    crossinline builder: ComponentBuilder.() -> Unit = {}
+) {
+    val componentList = textList.map { ComponentBuilder(it).apply(builder).build().component }
+    this.showActionBars(componentList)
+}
