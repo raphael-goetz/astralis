@@ -27,6 +27,8 @@ inline fun Player.interrogate(
     },
     timeoutMessage: AdventureMessage = adventureMessage("You didn't answer!") { type = CommunicationType.ALERT },
     timeout: Long = 10,
+    timeout: Long = 60,
+    timeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline onAnswerReceived: (player: Player, answered: Boolean, chatEvent: AsyncChatEvent?) -> Unit
 ) {
 
@@ -38,7 +40,7 @@ inline fun Player.interrogate(
         onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
     }
 
-    doLater(timeout) {
+    doLater(timeTypes.toMilliseconds(timeout)) {
         event.unregister()
         if (message != null) return@doLater
         this.sendText(timeoutMessage)

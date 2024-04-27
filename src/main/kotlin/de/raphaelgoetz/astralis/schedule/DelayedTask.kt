@@ -14,8 +14,9 @@ import kotlin.concurrent.schedule
  */
 inline fun doLater(
     delay: Long,
+    taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline function: () -> Unit = {}
-) = Timer(false).schedule(delay, ) {
+) = Timer(false).schedule(taskTimeTypes.toMilliseconds(delay)) {
     function.invoke()
 }
 
@@ -27,7 +28,8 @@ inline fun doLater(
  */
 inline fun doLaterAsync(
     delay: Long,
+    taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline function: () -> Unit = {}
-) = Timer().schedule(delay) {
+) = Timer().schedule(taskTimeTypes.toMilliseconds(delay)) {
     CoroutineScope(Dispatchers.Default).launch { function.invoke() }
 }

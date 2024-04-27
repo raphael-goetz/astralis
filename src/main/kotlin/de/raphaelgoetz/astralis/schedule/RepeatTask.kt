@@ -23,6 +23,9 @@ inline fun doAgain(
     period: Long,
     noinline function: RepeatTaskBuilder.(Int) -> Unit = {},
 ) = RepeatTaskBuilder(false, delay, period, function).start()
+    taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
+    noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
+) = RepeatTaskBuilder(false, taskTimeTypes.toMilliseconds(delay), taskTimeTypes.toMilliseconds(period), function).start()
 
 /**
  * @param delay is the time after which the given function gets executed.
@@ -36,8 +39,9 @@ inline fun doAgain(
 inline fun doAgainAsync(
     delay: Long,
     period: Long,
-    noinline function: RepeatTaskBuilder.(Int) -> Unit = {},
-) = RepeatTaskBuilder(true, delay, period, function).start()
+    taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
+    noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
+) = RepeatTaskBuilder(true, taskTimeTypes.toMilliseconds(delay), taskTimeTypes.toMilliseconds(period), function).start()
 
 fun stopTask(uuid: UUID) {
     tasks.remove(uuid)
@@ -82,7 +86,7 @@ data class RepeatTaskBuilder(
                 iteration++
 
             }
-        }, delay, period * 100)
+        }, delay, period)
 
         return uuid
     }
