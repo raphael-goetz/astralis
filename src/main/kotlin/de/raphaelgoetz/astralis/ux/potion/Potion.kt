@@ -42,6 +42,7 @@ fun Player.addEffect(
  * @param potionEffectType is the potion that will be removed/added.
  */
 fun Player.toggleEffect(potionEffectType: PotionEffectType): Boolean {
+
     if (this.hasPotionEffect(potionEffectType)) {
         this.removePotionEffect(potionEffectType)
         return false

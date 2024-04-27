@@ -25,16 +25,13 @@ inline fun <reified T : ItemMeta> smartItem(
     tagResolver: List<TagResolver> = emptyList(),
     interactionType: InteractionType = InteractionType.CLICK,
     builder: T.() -> Unit = {}
-) : SmartItem {
+): SmartItem {
     val itemStack = ItemStack(material)
     itemStack.applyMeta<T>(name, description, tagResolver, interactionType, builder)
     return SmartItem(itemStack, interactionType)
 }
 
 /**
- * Will create a ItemStack
- * @param material is the Material of the resulting ItemStack
- * @param builder contains the itemMeta properties which will be applied
  * Will create a SmartItem used for building an inventory.
  * @param name is the String which gets used for the display-name.
  * @param material is the Material of the resulting ItemStack.

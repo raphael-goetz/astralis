@@ -3,15 +3,16 @@ package de.raphaelgoetz.astralis.text.interrogate
 import de.raphaelgoetz.astralis.event.listen
 import de.raphaelgoetz.astralis.event.unregister
 import de.raphaelgoetz.astralis.schedule.doLater
+import de.raphaelgoetz.astralis.schedule.time.TaskTimeTypes
+import de.raphaelgoetz.astralis.schedule.time.toMilliseconds
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
-import de.raphaelgoetz.astralis.text.communication.sendText
+import de.raphaelgoetz.astralis.text.sendText
 import de.raphaelgoetz.astralis.text.components.AdventureMessage
 import de.raphaelgoetz.astralis.text.components.adventureMessage
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * @param questionMessage is the message the player will receive when the function is called.
@@ -24,8 +25,9 @@ inline fun Player.interrogate(
     questionMessage: AdventureMessage = adventureMessage("Please type your answer in the chat!") {
         type = CommunicationType.INFO
     },
-    timeoutMessage: AdventureMessage = adventureMessage("You didn't answer!") { type = CommunicationType.ALERT },
-    timeout: Long = 10,
+    timeoutMessage: AdventureMessage = adventureMessage("You didn't answer!") {
+        type = CommunicationType.ALERT
+    },
     timeout: Long = 60,
     timeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline onAnswerReceived: (player: Player, answered: Boolean, chatEvent: AsyncChatEvent?) -> Unit

@@ -8,7 +8,6 @@ import de.raphaelgoetz.astralis.ui.data.InventorySlots
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * Builder for the page-inventory.

@@ -5,9 +5,9 @@ import de.raphaelgoetz.astralis.ui.builder.InventoryBuilder
 import de.raphaelgoetz.astralis.ui.builder.SmartClick
 import de.raphaelgoetz.astralis.ui.data.InventoryRows
 import de.raphaelgoetz.astralis.ui.data.InventorySlots
+
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * Creates an inventory for a specific player.

@@ -9,7 +9,6 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
-import org.bukkit.plugin.java.JavaPlugin
 
 import java.util.function.Consumer
 import kotlin.collections.ArrayList
@@ -51,13 +50,14 @@ open class InventoryBuilder(
         inventory.setItem(slot, item.itemStack)
     }
 
-    fun setSlot(slot: InventorySlots, item: SmartItem, action: Consumer<InventoryClickEvent>?) = setSlot(slot.value, item, action)
     /**
      * Binds the smart-item to the inside a smart-click to a slot.
      * @param slot that the smart-click gets bind to by InventorySlots.
      * @param item of the smart-click.
      * @param action of the smart-click.
      */
+    fun setSlot(slot: InventorySlots, item: SmartItem, action: Consumer<InventoryClickEvent>?) =
+        setSlot(slot.value, item, action)
 
     /**
      * Binds the smart-item to the inside a smart-click to a slot.

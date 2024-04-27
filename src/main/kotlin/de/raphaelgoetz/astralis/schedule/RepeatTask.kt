@@ -1,6 +1,8 @@
 package de.raphaelgoetz.astralis.schedule
 
 import de.raphaelgoetz.astralis.annotations.InternalUse
+import de.raphaelgoetz.astralis.schedule.time.TaskTimeTypes
+import de.raphaelgoetz.astralis.schedule.time.toMilliseconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

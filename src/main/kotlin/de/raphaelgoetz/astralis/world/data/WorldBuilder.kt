@@ -9,7 +9,6 @@ import org.bukkit.GameRule
 import org.bukkit.World
 import org.bukkit.WorldCreator
 import org.bukkit.event.world.WorldLoadEvent
-import org.bukkit.plugin.java.JavaPlugin
 
 /**
  * Builder for creating setup worlds. Specifically worlds to build in.
