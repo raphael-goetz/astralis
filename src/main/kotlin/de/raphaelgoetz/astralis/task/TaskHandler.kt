@@ -11,15 +11,19 @@ fun Task.register() {
     taskRegistry[this.uuid] = this
 }
 
-fun stopTask(uuid: UUID) {
 /**
  * Stop & registration of the task.
  * @param uuid of the given task
  */
+fun unregisterTask(uuid: UUID) {
+    taskRegistry[uuid]?.stop()
+    taskRegistry.remove(uuid)
+}
 
 /**
  * Stop & registration of the task.
  */
+fun Task.unregister() {
     taskRegistry[uuid]?.stop()
     taskRegistry.remove(uuid)
 }
