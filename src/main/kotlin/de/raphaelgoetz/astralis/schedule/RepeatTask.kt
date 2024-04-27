@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.HashMap
 
-private val tasks: HashMap<UUID, Timer> = hashMapOf()
+private val repeatingTasks: HashMap<UUID, Timer> = hashMapOf()
 
 /**
  * @param delay is the time after which the given function gets executed.
@@ -45,12 +45,12 @@ inline fun doAgainAsync(
     noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
 ) = RepeatTaskBuilder(true, taskTimeTypes.toMilliseconds(delay), taskTimeTypes.toMilliseconds(period), function).start()
 
-fun stopTask(uuid: UUID) {
-    tasks.remove(uuid)
 /**
  * Stops an repeating task.
  * @param uuid of the task that will be stopped.
  */
+fun stopRepeatingTask(uuid: UUID) {
+    repeatingTasks.remove(uuid)
 }
 
 /**
@@ -74,7 +74,7 @@ data class RepeatTaskBuilder(
     fun start(): UUID {
 
         val uuid = UUID.randomUUID()
-        tasks.putIfAbsent(uuid, timer)
+        repeatingTasks.putIfAbsent(uuid, timer)
 
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
