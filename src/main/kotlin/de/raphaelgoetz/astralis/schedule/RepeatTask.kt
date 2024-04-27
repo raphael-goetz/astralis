@@ -23,8 +23,6 @@ private val repeatingTasks: HashMap<UUID, Timer> = hashMapOf()
 inline fun doAgain(
     delay: Long,
     period: Long,
-    noinline function: RepeatTaskBuilder.(Int) -> Unit = {},
-) = RepeatTaskBuilder(false, delay, period, function).start()
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
 ) = RepeatTaskBuilder(false, taskTimeTypes.toMilliseconds(delay), taskTimeTypes.toMilliseconds(period), function).start()
@@ -36,7 +34,7 @@ inline fun doAgain(
  * @param function is the function that gets called.
  * It contains an integer that will be incremented after every execution.
  * It's main purpose is to count how many times the given function has been called.
- * The given function will be called asynchronous
+ * The given function will be called asynchronous.
  */
 inline fun doAgainAsync(
     delay: Long,
@@ -65,11 +63,11 @@ data class RepeatTaskBuilder(
     private val async: Boolean,
     private val delay: Long,
     private val period: Long,
-    private val function: RepeatTaskBuilder.(Int) -> Unit = {},
+    private val function: RepeatTaskBuilder.(Long) -> Unit = {},
 ) {
 
     private val timer = Timer()
-    private var iteration: Int = 0
+    private var iteration: Long = 0
 
     fun start(): UUID {
 
