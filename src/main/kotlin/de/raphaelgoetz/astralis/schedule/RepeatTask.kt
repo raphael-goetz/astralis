@@ -21,7 +21,7 @@ private val repeatingTasks: HashMap<UUID, Timer> = hashMapOf()
  * The given function will be called synchronous.
  */
 inline fun doAgain(
-    delay: Long,
+    delay: Long = 0,
     period: Long,
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
@@ -37,7 +37,7 @@ inline fun doAgain(
  * The given function will be called asynchronous.
  */
 inline fun doAgainAsync(
-    delay: Long,
+    delay: Long = 0,
     period: Long,
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
@@ -67,7 +67,9 @@ data class RepeatTaskBuilder(
 ) {
 
     private val timer = Timer()
+
     private var iteration: Long = 0
+    private var stopped = false
 
     fun start(): UUID {
 
@@ -77,17 +79,22 @@ data class RepeatTaskBuilder(
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
 
+                if (stopped) return
+
                 if (async) {
                     CoroutineScope(Dispatchers.Default).launch { function(iteration) }
                 } else {
                     function(iteration)
                 }
-
                 iteration++
 
             }
         }, delay, period)
 
         return uuid
+    }
+
+    fun stop() {
+        timer.cancel()
     }
 }
