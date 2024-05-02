@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
     id 'com.github.johnrengelman.shadow' version '8.0.0'
+    id "io.papermc.paperweight.userdev" version "1.7.0"
 }
 
 group = astralisGroup
@@ -24,7 +25,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:${paperVersion}-R0.1-SNAPSHOT"
+    paperweight.paperDevBundle "${paperVersion}-R0.1-SNAPSHOT"
+
     api "com.mojang:brigadier:${brigadierVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
