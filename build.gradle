@@ -28,6 +28,16 @@ dependencies {
     paperweight.paperDevBundle "${paperVersion}-R0.1-SNAPSHOT"
 
     api "com.mojang:brigadier:${brigadierVersion}"
+
+    implementation 'org.jetbrains.exposed:exposed-core:0.50.0'
+    implementation 'org.jetbrains.exposed:exposed-crypt:0.50.0'
+    implementation 'org.jetbrains.exposed:exposed-dao:0.50.0'
+    implementation 'org.jetbrains.exposed:exposed-jdbc:0.50.0'
+
+    implementation "org.jetbrains.exposed:exposed-jodatime:0.50.0"
+
+    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
 }
