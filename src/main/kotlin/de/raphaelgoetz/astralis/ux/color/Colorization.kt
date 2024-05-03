@@ -2,6 +2,7 @@ package de.raphaelgoetz.astralis.ux.color
 
 import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.format.TextColor
+import org.bukkit.Color
 import org.bukkit.DyeColor
 
 /**
@@ -59,6 +60,14 @@ fun Colorization.asDyeColor(): DyeColor {
         Colorization.MAGENTA -> DyeColor.MAGENTA
         Colorization.PINK -> DyeColor.PINK
     }
+}
+
+fun Colorization.asColor(): Color {
+    return Color.fromRGB(
+        this.asTextColor().red(),
+        this.asTextColor().green(),
+        this.asTextColor().blue()
+    )
 }
 
 /**
