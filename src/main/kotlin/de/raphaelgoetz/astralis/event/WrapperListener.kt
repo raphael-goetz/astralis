@@ -1,6 +1,6 @@
 package de.raphaelgoetz.astralis.event
 
-import de.raphaelgoetz.astralis.Astralis
+import de.raphaelgoetz.astralis.AstralisInstance
 import de.raphaelgoetz.astralis.annotations.InternalUse
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -29,7 +29,7 @@ inline fun <reified T: Event> WrapperListener<T>.subscribe() =
         if (event is T) {
             onEvent(event)
         }
-    }, Astralis)
+    }, AstralisInstance)
 
 /**
  * Registers the player-event only for a specific player from the given WrapperListener.
@@ -40,4 +40,4 @@ inline fun <reified T: PlayerEvent> WrapperListener<T>.subscribeForPlayer(player
         if (event is T && event.player.uniqueId == player.uniqueId) {
             onEvent(event)
         }
-    }, Astralis)
+    }, AstralisInstance)

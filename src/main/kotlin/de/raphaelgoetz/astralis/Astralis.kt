@@ -6,30 +6,37 @@ import de.raphaelgoetz.astralis.command.astralisCommandMap
 import de.raphaelgoetz.astralis.event.listen
 import org.bukkit.plugin.java.JavaPlugin
 
-object Astralis : JavaPlugin() {
+lateinit var AstralisInstance: Astralis
+    private set
 
-    fun load() {}
+abstract class Astralis : JavaPlugin() {
 
-    fun enable() {}
+    open fun load() {}
 
-    fun disable() {}
+    open fun enable() {}
+
+    open fun disable() {}
 
     override fun onLoad() {
         load()
     }
 
     override fun onEnable() {
+        AstralisInstance = this
+        enable()
+        registerCommands()
+    }
+
+    override fun onDisable() {
+        disable()
+    }
+
+    private fun registerCommands() {
 
         listen<CommandRegisteredEvent<BukkitBrigadierCommandSource>> { event ->
             astralisCommandMap[event.commandLabel]?.let { event.literal = it }
         }
 
-        enable()
-
-    }
-
-    override fun onDisable() {
-        disable()
     }
 
 }
