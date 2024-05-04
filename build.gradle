@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'com.github.johnrengelman.shadow' version '8.0.0'
     id "io.papermc.paperweight.userdev" version "1.7.0"
+    id 'maven-publish'
 }
 
 group = astralisGroup
@@ -43,4 +44,17 @@ dependencies {
 
 kotlin {
     jvmToolchain(21)
+}
+
+publishing {
+
+    publications {
+        create("Astralis", MavenPublication) {
+            from(components["kotlin"])
+
+            groupId = "de.raphaelgoetz"
+            artifactId = "astralis"
+            version = version
+        }
+    }
 }
