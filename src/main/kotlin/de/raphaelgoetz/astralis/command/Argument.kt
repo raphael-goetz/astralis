@@ -11,9 +11,6 @@ import com.mojang.brigadier.arguments.StringArgumentType.string
 import com.mojang.brigadier.builder.RequiredArgumentBuilder
 import com.mojang.brigadier.builder.RequiredArgumentBuilder.argument
 import com.mojang.brigadier.context.CommandContext
-import org.apache.commons.lang.math.LongRange
-
-import kotlin.collections.HashMap
 
 inline fun <reified T> createArgument(
     name: String,
@@ -72,7 +69,7 @@ inline fun createLongArgument(
     name: String,
     from: Long = Long.MIN_VALUE,
     to: Long = Long.MAX_VALUE,
-    suggestions: List<Long> = LongRange(from, to + 1f).toArray().toList(),
+    suggestions: List<Long> = LongRange(from, to).toList(),
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Long) -> Int
 ) = createArgument<Long>(name, longArg(from, to), suggestions, onExecute)
 

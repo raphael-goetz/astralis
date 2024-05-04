@@ -5,7 +5,6 @@ import de.raphaelgoetz.astralis.world.data.WorldGenerationTypes
 import org.bukkit.Bukkit
 import org.bukkit.World
 import org.bukkit.WorldCreator
-import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 /**
