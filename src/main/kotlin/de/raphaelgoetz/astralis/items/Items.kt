@@ -18,13 +18,13 @@ import org.bukkit.inventory.meta.ItemMeta
  * @param builder contains the itemMeta properties which are getting applied.
  * @see SmartItem
  */
-inline fun <reified T : ItemMeta> smartItem(
+inline fun <reified T : ItemMeta> createSmartItem(
     name: String,
     material: Material,
     description: String = "",
     tagResolver: List<TagResolver> = emptyList(),
     interactionType: InteractionType = InteractionType.CLICK,
-    builder: T.() -> Unit = {}
+    crossinline builder: T.() -> Unit = {}
 ): SmartItem {
     val itemStack = ItemStack(material)
     itemStack.applyMeta<T>(name, description, tagResolver, interactionType, builder)
@@ -32,7 +32,7 @@ inline fun <reified T : ItemMeta> smartItem(
 }
 
 /**
- * Will create a SmartItem used for building an inventory.
+ * Will create a SmartItem used for building an inventory. Without defining a custom meta!
  * @param name is the String which gets used for the display-name.
  * @param material is the Material of the resulting ItemStack.
  * @param description is the String which gets used for the lore.
@@ -41,14 +41,14 @@ inline fun <reified T : ItemMeta> smartItem(
  * @param builder contains the itemMeta properties which are getting applied.
  * @see SmartItem
  */
-inline fun smartItem(
+inline fun smartItemWithoutMeta(
     name: String,
     material: Material,
     description: String = "",
     tagResolver: List<TagResolver> = emptyList(),
     interactionType: InteractionType = InteractionType.CLICK,
-    builder: ItemMeta.() -> Unit = {}
-): SmartItem = smartItem<ItemMeta>(name, material, description, tagResolver, interactionType, builder)
+    crossinline builder: ItemMeta.() -> Unit = {}
+): SmartItem = createSmartItem<ItemMeta>(name, material, description, tagResolver, interactionType, builder)
 
 /**
  * Will create a ItemStack.
@@ -57,7 +57,7 @@ inline fun smartItem(
  */
 inline fun <reified T : ItemMeta> basicItem(
     material: Material,
-    builder: T.() -> Unit = {}
+    crossinline builder: T.() -> Unit = {}
 ): ItemStack {
     val itemStack = ItemStack(material)
     val meta = itemStack.itemMeta as T
@@ -67,9 +67,11 @@ inline fun <reified T : ItemMeta> basicItem(
 }
 
 /**
- * Will create a ItemStack.
+ * Will create a ItemStack. Without defining a custom meta!
  * @param material is the Material of the resulting ItemStack.
  * @param builder contains the itemMeta properties which will be applied.
  */
-inline fun basicItem(material: Material, builder: ItemMeta.() -> Unit = {}): ItemStack =
-    basicItem<ItemMeta>(material, builder)
+inline fun basicItemWithoutMeta(
+    material: Material,
+    crossinline builder: ItemMeta.() -> Unit = {}
+): ItemStack = basicItem<ItemMeta>(material, builder)

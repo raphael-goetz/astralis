@@ -10,12 +10,12 @@ import org.bukkit.util.Vector
 abstract class Shape(
     open val world: World,
 ) {
-    abstract fun getOutline(): List<Vector>
-    abstract fun getFilament(): List<Vector>
+    abstract fun getShapeOutline(): List<Vector>
+    abstract fun getShapeFilament(): List<Vector>
 
     inline fun <reified T : BlockData> fillInstant(
         material: Material,
-        filament: List<Vector> = getFilament(),
+        filament: List<Vector> = getShapeFilament(),
         crossinline builder: T.() -> Unit = {}
     ) {
 
@@ -30,12 +30,12 @@ abstract class Shape(
         }
     }
 
-    fun fillInstant(material: Material, filament: List<Vector> = getFilament()) = fillInstant<BlockData>(material)
+    fun fillInstant(material: Material, filament: List<Vector> = getShapeFilament()) = fillInstant<BlockData>(material)
 
     inline fun <reified T : BlockData> fillAtRate(
         rate: Int,
         material: Material,
-        filament: List<Vector> = getFilament(),
+        filament: List<Vector> = getShapeFilament(),
         crossinline builder: T.() -> Unit = {}
     ) {
 
@@ -48,6 +48,6 @@ abstract class Shape(
 
     }
 
-    fun fillAtRage(rate: Int, material: Material, filament: List<Vector> = getFilament()) =
+    fun fillAtRage(rate: Int, material: Material, filament: List<Vector> = getShapeFilament()) =
         fillAtRate<BlockData>(rate, material, filament)
 }

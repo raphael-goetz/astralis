@@ -11,8 +11,11 @@ class Rectangle(
     private val to: Vector,
 ) : Shape(world) {
 
-    val filament: List<Vector> = getFilament()
-    val outline: List<Vector> = getOutline()
+    val filament: List<Vector>
+        get() = getShapeFilament()
+
+    val outline: List<Vector>
+        get() = getShapeOutline()
 
     private val minX = min(from.x, to.x).toInt()
     private val minY = min(from.y, to.y).toInt()
@@ -22,7 +25,7 @@ class Rectangle(
     private val maxY = max(from.y, to.y).toInt()
     private val maxZ = max(from.z, to.z).toInt()
 
-    override fun getFilament(): MutableList<Vector> {
+    override fun getShapeFilament(): MutableList<Vector> {
         val result = mutableListOf<Vector>()
 
         for (x in minX..maxX) {
@@ -36,7 +39,7 @@ class Rectangle(
         return result
     }
 
-    override fun getOutline(): MutableList<Vector> {
+    override fun getShapeOutline(): MutableList<Vector> {
         val result = mutableListOf<Vector>()
 
         //adding all points in the x-y-layer
