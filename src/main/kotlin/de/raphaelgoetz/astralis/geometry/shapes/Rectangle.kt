@@ -5,15 +5,23 @@ import org.bukkit.util.Vector
 import kotlin.math.max
 import kotlin.math.min
 
+/**
+ * Creates a rectangle.
+ * @param world of the shape.
+ * @param from starting point of the location.
+ * @param to ending point of the location.
+ */
 class Rectangle(
     override val world: World,
     private val from: Vector,
     private val to: Vector,
 ) : Shape(world) {
 
+    /** List of all the locations inside the shape */
     val filament: List<Vector>
         get() = getShapeFilament()
 
+    /** List of all the locations of the outline */
     val outline: List<Vector>
         get() = getShapeOutline()
 
@@ -65,6 +73,5 @@ class Rectangle(
 
         return result
     }
-
 
 }

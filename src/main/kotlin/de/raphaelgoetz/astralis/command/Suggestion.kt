@@ -2,7 +2,13 @@ package de.raphaelgoetz.astralis.command
 
 import com.mojang.brigadier.LiteralMessage
 import com.mojang.brigadier.builder.RequiredArgumentBuilder
+import de.raphaelgoetz.astralis.annotations.InternalUse
 
+/**
+ * Creates suggestions for an argument.
+ * @param suggestions for the current argument.
+ */
+@InternalUse
 fun <S, T> RequiredArgumentBuilder<S, T>.suggest(suggestions: List<String>): RequiredArgumentBuilder<S, T> {
     this.suggests { _, builder ->
 
@@ -18,6 +24,11 @@ fun <S, T> RequiredArgumentBuilder<S, T>.suggest(suggestions: List<String>): Req
     return this
 }
 
+/**
+ * Creates suggestions for an argument.
+ * @param suggestions for the current argument.
+ */
+@InternalUse
 fun <S, T> RequiredArgumentBuilder<S, T>.suggest(suggestions: Map<String, String>): RequiredArgumentBuilder<S, T> {
     this.suggests { _, builder ->
 

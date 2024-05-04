@@ -12,6 +12,14 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder
 import com.mojang.brigadier.builder.RequiredArgumentBuilder.argument
 import com.mojang.brigadier.context.CommandContext
 
+/**
+ * Creating an argument for the command builder.
+ * @param name of the current argument.
+ * @param type of the argument.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun <reified T> createArgument(
     name: String,
     type: ArgumentType<T>,
@@ -24,6 +32,14 @@ inline fun <reified T> createArgument(
     }.suggest(correctSuggestions)
 }
 
+/**
+ * Creating an argument for the command builder.
+ * @param name of the current argument.
+ * @param type of the argument.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun <reified T> createArgument(
     name: String,
     type: ArgumentType<T>,
@@ -37,18 +53,41 @@ inline fun <reified T> createArgument(
     }.suggest(correctSuggestions)
 }
 
+/**
+ * Creating a string argument for the command builder.
+ * @param name of the current argument.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createStringArgument(
     name: String,
     suggestions: Map<String, String>,
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, String) -> Int
 ) = createArgument<String>(name, string(), suggestions, onExecute)
 
+/**
+ * Creating a string argument for the command builder.
+ * @param name of the current argument.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createStringArgument(
     name: String,
     suggestions: List<String>,
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, String) -> Int
 ) = createArgument<String>(name, string(), suggestions, onExecute)
 
+/**
+ * Creating an integer argument for the command builder.
+ * @param name of the current argument.
+ * @param from starting integer of the range.
+ * @param to ending integer of the range.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createIntArgument(
     name: String,
     from: Int = Int.MIN_VALUE,
@@ -57,6 +96,15 @@ inline fun createIntArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Int) -> Int
 ) = createArgument<Int>(name, integer(from, to), suggestions, onExecute)
 
+/**
+ * Creating an integer argument for the command builder.
+ * @param name of the current argument.
+ * @param from starting integer of the range.
+ * @param to ending integer of the range.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createIntArgument(
     name: String,
     from: Int = Int.MIN_VALUE,
@@ -65,6 +113,15 @@ inline fun createIntArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Int) -> Int
 ) = createArgument<Int>(name, integer(from, to), suggestions, onExecute)
 
+/**
+ * Creating a long argument for the command builder.
+ * @param name of the current argument.
+ * @param from starting long of the range.
+ * @param to ending long of the range.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createLongArgument(
     name: String,
     from: Long = Long.MIN_VALUE,
@@ -73,6 +130,15 @@ inline fun createLongArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Long) -> Int
 ) = createArgument<Long>(name, longArg(from, to), suggestions, onExecute)
 
+/**
+ * Creating a long argument for the command builder.
+ * @param name of the current argument.
+ * @param from starting long of the range.
+ * @param to ending long of the range.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createLongArgument(
     name: String,
     from: Long = Long.MIN_VALUE,
@@ -81,6 +147,14 @@ inline fun createLongArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Long) -> Int
 ) = createArgument<Long>(name, longArg(from, to), suggestions, onExecute)
 
+/**
+ * Creating a float argument for the command builder.
+ * @param name of the current argument.
+ * @param floats that will be used as arguments.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createFloatArgument(
     name: String,
     floats: List<Float>,
@@ -88,6 +162,15 @@ inline fun createFloatArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Float) -> Int
 ) = createArgument<Float>(name, floatArg(), suggestions, onExecute)
 
+
+/**
+ * Creating a float argument for the command builder.
+ * @param name of the current argument.
+ * @param floats that will be used as arguments.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createFloatArgument(
     name: String,
     floats: List<Float>,
@@ -95,13 +178,29 @@ inline fun createFloatArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Float) -> Int
 ) = createArgument<Float>(name, floatArg(), suggestions, onExecute)
 
+/**
+ * Creating a double argument for the command builder.
+ * @param name of the current argument.
+ * @param doubles that will be used as arguments.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createDoubleArgument(
     name: String,
     doubles: List<Double>,
-    suggestions: List<Double>,
+    suggestions: List<Double> = doubles,
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Double) -> Int
 ) = createArgument<Double>(name, doubleArg(), suggestions, onExecute)
 
+/**
+ * Creating a double argument for the command builder.
+ * @param name of the current argument.
+ * @param doubles that will be used as arguments.
+ * @param suggestions that will be shown onto an argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createDoubleArgument(
     name: String,
     doubles: List<Double>,
@@ -109,6 +208,14 @@ inline fun createDoubleArgument(
     crossinline onExecute: (CommandContext<BukkitBrigadierCommandSource>, Double) -> Int
 ) = createArgument<Double>(name, doubleArg(), suggestions, onExecute)
 
+/**
+ * Creating a boolean argument for the command builder. Adds both true and false.
+ * @param name of the current argument.
+ * @param falseSuggestion is the suggestion on the false argument.
+ * @param falseSuggestion is the suggestion on the true argument.
+ * @param onExecute will be executed when the command is called.
+ * @return RequiredArgumentBuilder<BukkitBrigadierCommandSource, T> for further argument adding.
+ */
 inline fun createBooleanArgument(
     name: String,
     falseSuggestion: String = "",

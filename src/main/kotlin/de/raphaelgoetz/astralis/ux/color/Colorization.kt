@@ -62,6 +62,10 @@ fun Colorization.asDyeColor(): DyeColor {
     }
 }
 
+/**
+ * @return the bukkit color.
+ * @see Color
+ */
 fun Colorization.asColor(): Color {
     return Color.fromRGB(
         this.asTextColor().red(),

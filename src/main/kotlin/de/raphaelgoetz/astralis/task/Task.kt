@@ -5,7 +5,7 @@ import java.util.UUID
 
 /**
  * Interface for tasks. For example a player specific task.
- * No-Clip is an use-case example.
+ * No-Clip is a use-case example.
  */
 interface Task {
 

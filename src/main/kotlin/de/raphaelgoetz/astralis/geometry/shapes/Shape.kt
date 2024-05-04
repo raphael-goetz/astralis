@@ -7,12 +7,26 @@ import org.bukkit.World
 import org.bukkit.block.data.BlockData
 import org.bukkit.util.Vector
 
+/**
+ * Template for creating any shape.
+ * @param world of the shape.
+ */
 abstract class Shape(
     open val world: World,
 ) {
+
+    /** List of all the locations inside the shape */
     abstract fun getShapeOutline(): List<Vector>
+
+    /** List of all the locations of the outline */
     abstract fun getShapeFilament(): List<Vector>
 
+    /**
+     * Fills any part instant.
+     * @param material of the filament.
+     * @param filament (list of locations) that get filled.
+     * @param builder to configure the block-data.
+     */
     inline fun <reified T : BlockData> fillInstant(
         material: Material,
         filament: List<Vector> = getShapeFilament(),
@@ -30,8 +44,23 @@ abstract class Shape(
         }
     }
 
-    fun fillInstant(material: Material, filament: List<Vector> = getShapeFilament()) = fillInstant<BlockData>(material)
+    /**
+     * Fills any part instant.
+     * @param material of the filament.
+     * @param filament (list of locations) that get filled.
+     */
+    fun fillInstant(
+        material: Material,
+        filament: List<Vector> = getShapeFilament()
+    ) = fillInstant<BlockData>(material)
 
+    /**
+     * Fills any part at a specific rate.
+     * @param rate how many blocks get placed at a second.
+     * @param material of the filament.
+     * @param filament (list of locations) that get filled.
+     * @param builder to configure the block-data.
+     */
     inline fun <reified T : BlockData> fillAtRate(
         rate: Int,
         material: Material,
@@ -48,6 +77,12 @@ abstract class Shape(
 
     }
 
+    /**
+     * Fills any part at a specific rate.
+     * @param rate how many blocks get placed at a second.
+     * @param material of the filament.
+     * @param filament (list of locations) that get filled.
+     */
     fun fillAtRage(rate: Int, material: Material, filament: List<Vector> = getShapeFilament()) =
         fillAtRate<BlockData>(rate, material, filament)
 }
