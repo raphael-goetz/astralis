@@ -34,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    api "io.papermc.paper:paper-api:${paperVersion}-R0.1-SNAPSHOT"
+    implementation "io.papermc.paper:paper-api:${paperVersion}-R0.1-SNAPSHOT"
     api "io.papermc.paper:paper-mojangapi:${paperVersion}-R0.1-SNAPSHOT"
     api "net.kyori:adventure-api:${adventureVersion}"
 
@@ -47,8 +47,8 @@ dependencies {
 
     api "org.xerial:sqlite-jdbc:${sqliteVersion}"
 
-    api "org.jetbrains.kotlin:kotlin-stdlib"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
 }
 
 kotlin {
