@@ -34,21 +34,11 @@ repositories {
 }
 
 dependencies {
-    implementation "io.papermc.paper:paper-api:${paperVersion}-R0.1-SNAPSHOT"
-    api "io.papermc.paper:paper-mojangapi:${paperVersion}-R0.1-SNAPSHOT"
-    api "net.kyori:adventure-api:${adventureVersion}"
-
+    api "io.papermc.paper:paper-api:${paperVersion}-R0.1-SNAPSHOT"
     api "com.mojang:brigadier:${brigadierVersion}"
 
-    api "org.jetbrains.exposed:exposed-core:${exposedVersion}"
-    api "org.jetbrains.exposed:exposed-crypt:${exposedVersion}"
-    api "org.jetbrains.exposed:exposed-jdbc:${exposedVersion}"
-    api "org.jetbrains.exposed:exposed-jodatime:${exposedVersion}"
-
-    api "org.xerial:sqlite-jdbc:${sqliteVersion}"
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
+    api "org.jetbrains.kotlin:kotlin-stdlib"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutines}"
 }
 
 kotlin {
