@@ -14,5 +14,8 @@ enum class InteractionType(val color: Colorization, val sound: Sound) {
     ENABLED(Colorization.LIME, Sound.ENTITY_VILLAGER_YES),
     DISABLED(Colorization.RED, Sound.ENTITY_VILLAGER_NO),
     CLICK(Colorization.GRAY, Sound.UI_LOOM_SELECT_PATTERN),
-    PAGE_TURN(Colorization.GRAY, Sound.UI_LOOM_TAKE_RESULT)
+    PAGE_TURN(Colorization.GRAY, Sound.UI_LOOM_TAKE_RESULT),
+
+    //Automatically underlines an item if set as display-name
+    DISPLAY_CLICK(Colorization.LIME, Sound.UI_LOOM_SELECT_PATTERN)
 }
