@@ -4,6 +4,7 @@ import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.items.data.InteractionType
 import de.raphaelgoetz.astralis.text.components.adventureText
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 
@@ -35,12 +36,23 @@ inline fun <reified T : ItemMeta> ItemStack.applyMeta(
 ) {
     val meta = this.itemMeta as T
     meta.apply { builder(this) }
-    meta.displayName(adventureText(name) {
+    val title = adventureText(name) {
+
+        if (interactionType == InteractionType.DISPLAY_CLICK) {
+            underlined(true)
+        }
+
+        italic(false)
         color = interactionType.color
         resolver = tagResolver.toTypedArray()
-    })
+    }
+
+    meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(title))
 
     val currentDescription = smartestLoreBuilder(description)
-    if (currentDescription.isNotEmpty()) meta.lore(currentDescription)
+    if (currentDescription.isNotEmpty()) {
+        val stringLore = currentDescription.map { LegacyComponentSerializer.legacySection().serialize(it) }
+        meta.lore = stringLore
+    }
     this.itemMeta = meta
 }
