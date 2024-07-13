@@ -3,13 +3,12 @@ package de.raphaelgoetz.astralis.text.interrogate
 import de.raphaelgoetz.astralis.event.listen
 import de.raphaelgoetz.astralis.event.unregister
 import de.raphaelgoetz.astralis.schedule.doLater
+import de.raphaelgoetz.astralis.schedule.doNow
 import de.raphaelgoetz.astralis.schedule.time.TaskTimeTypes
-import de.raphaelgoetz.astralis.schedule.time.toMilliseconds
 import de.raphaelgoetz.astralis.text.communication.CommunicationType
-import de.raphaelgoetz.astralis.text.sendText
 import de.raphaelgoetz.astralis.text.components.AdventureMessage
 import de.raphaelgoetz.astralis.text.components.adventureMessage
-
+import de.raphaelgoetz.astralis.text.sendText
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
@@ -38,13 +37,17 @@ inline fun Player.interrogate(
     this.sendText(questionMessage)
     val event = this.listen<AsyncChatEvent> { asyncChatEvent ->
         message = asyncChatEvent.message()
-        onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
+        doNow {
+            onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
+        }
     }
 
-    doLater(timeTypes.toMilliseconds(timeout)) {
+    doLater(timeout, timeTypes) {
         event.unregister()
         if (message != null) return@doLater
         this.sendText(timeoutMessage)
-        onAnswerReceived.invoke(this@interrogate, false, null)
+        doNow {
+            onAnswerReceived.invoke(this@interrogate, false, null)
+        }
     }
 }
