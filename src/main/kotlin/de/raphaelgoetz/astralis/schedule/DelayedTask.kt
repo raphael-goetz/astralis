@@ -2,9 +2,6 @@ package de.raphaelgoetz.astralis.schedule
 
 import de.raphaelgoetz.astralis.schedule.time.TaskTimeTypes
 import de.raphaelgoetz.astralis.schedule.time.toMilliseconds
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -19,7 +16,9 @@ inline fun doLater(
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline function: () -> Unit = {}
 ) = Timer(false).schedule(taskTimeTypes.toMilliseconds(delay)) {
-    function.invoke()
+    doNow {
+        function.invoke()
+    }
 }
 
 /**
@@ -33,5 +32,7 @@ inline fun doLaterAsync(
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     crossinline function: () -> Unit = {}
 ) = Timer().schedule(taskTimeTypes.toMilliseconds(delay)) {
-    CoroutineScope(Dispatchers.Default).launch { function.invoke() }
+    doNowAsync {
+        function.invoke()
+    }
 }

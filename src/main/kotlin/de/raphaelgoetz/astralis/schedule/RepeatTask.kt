@@ -3,11 +3,7 @@ package de.raphaelgoetz.astralis.schedule
 import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.schedule.time.TaskTimeTypes
 import de.raphaelgoetz.astralis.schedule.time.toMilliseconds
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.HashMap
 
 private val repeatingTasks: HashMap<UUID, Timer> = hashMapOf()
 
@@ -25,7 +21,12 @@ inline fun doAgain(
     period: Long,
     taskTimeTypes: TaskTimeTypes = TaskTimeTypes.SECONDS,
     noinline function: RepeatTaskBuilder.(Long) -> Unit = {},
-) = RepeatTaskBuilder(false, taskTimeTypes.toMilliseconds(delay), taskTimeTypes.toMilliseconds(period), function).start()
+) = RepeatTaskBuilder(
+    false,
+    taskTimeTypes.toMilliseconds(delay),
+    taskTimeTypes.toMilliseconds(period),
+    function
+).start()
 
 /**
  * @param delay is the time after which the given function gets executed.
@@ -81,11 +82,12 @@ data class RepeatTaskBuilder(
 
                 if (stopped) return
 
-                if (async) {
-                    CoroutineScope(Dispatchers.Default).launch { function(iteration) }
-                } else {
+                if (async) doNowAsync {
+                    function(iteration)
+                } else doNow {
                     function(iteration)
                 }
+
                 iteration++
 
             }
