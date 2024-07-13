@@ -62,8 +62,8 @@ fun smartestLoreBuilder(input: String): List<Component> {
     if (input.isEmpty()) return emptyList()
 
     val strings = input.split(" ")
-    if (strings.size <= 7) return listOf(input.stringToStyledLore())
-    val subList = Lists.partition(strings, 6)
+    if (strings.size <= 5) return listOf(input.stringToStyledLore())
+    val subList = Lists.partition(strings, 4)
     val result = mutableListOf<Component>()
 
     subList.forEach { list ->
