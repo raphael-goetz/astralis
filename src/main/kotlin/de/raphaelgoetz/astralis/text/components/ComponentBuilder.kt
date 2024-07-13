@@ -44,6 +44,7 @@ inline fun adventureMessage(
 class ComponentBuilder(private val input: String) {
 
     var currentStyles = mutableSetOf<TextDecoration>()
+    private var removeStyles = mutableSetOf<TextDecoration>()
 
     /**
      * @see TextDecoration for available text decorations.
@@ -52,26 +53,35 @@ class ComponentBuilder(private val input: String) {
      */
     fun italic(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.ITALIC)
+        else removeStyle(TextDecoration.ITALIC)
     }
 
     fun bold(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.BOLD)
+        else removeStyle(TextDecoration.BOLD)
     }
 
     fun strikethrough(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.STRIKETHROUGH)
+        else removeStyle(TextDecoration.STRIKETHROUGH)
     }
 
     fun underlined(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.UNDERLINED)
+        else removeStyle(TextDecoration.UNDERLINED)
     }
 
     fun obfuscated(enabled: Boolean) {
         if (enabled) addStyle(TextDecoration.OBFUSCATED)
+        else removeStyle(TextDecoration.OBFUSCATED)
     }
 
     private fun addStyle(textDecoration: TextDecoration) {
         currentStyles.add(textDecoration)
+    }
+
+    private fun removeStyle(textDecoration: TextDecoration) {
+        removeStyles.add(textDecoration)
     }
 
     /*
@@ -111,6 +121,8 @@ class ComponentBuilder(private val input: String) {
         var styleBuilder = textComponent.style()
 
         currentStyles.forEach { styleBuilder = styleBuilder.decoration(it, true) }
+        removeStyles.forEach { styleBuilder = styleBuilder.decoration(it, true) }
+
         clickEvent?.let { styleBuilder = styleBuilder.clickEvent(it) }
         hoverEvent?.let { styleBuilder = styleBuilder.hoverEvent(hoverEvent) }
         color?.let { styleBuilder = styleBuilder.color(it.rgbLike) }
