@@ -7,6 +7,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import de.raphaelgoetz.astralis.annotations.InternalUse
 import de.raphaelgoetz.astralis.command.placeholder.PlaceholderCommand
 import org.bukkit.Bukkit
+import java.util.*
 
 /**
  * Internal map for command registering.

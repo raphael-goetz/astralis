@@ -39,7 +39,7 @@ abstract class Astralis : JavaPlugin() {
 
         /** Registers all custom commands */
         listen<CommandRegisteredEvent<BukkitBrigadierCommandSource>> { event ->
-            astralisCommandMap[event.commandLabel]?.let { event.literal = it }
+            astralisCommandMap[event.commandLabel].let { event.literal = it }
         }
 
     }

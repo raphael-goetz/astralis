@@ -2,13 +2,12 @@ package de.raphaelgoetz.astralis.ui
 
 import de.raphaelgoetz.astralis.text.components.adventureText
 import de.raphaelgoetz.astralis.text.translation.getValue
-import de.raphaelgoetz.astralis.ux.color.Colorization
 import de.raphaelgoetz.astralis.ui.builder.DisplayInventoryBuilder
 import de.raphaelgoetz.astralis.ui.builder.InventoryBuilder
 import de.raphaelgoetz.astralis.ui.builder.SmartClick
 import de.raphaelgoetz.astralis.ui.data.InventoryRows
 import de.raphaelgoetz.astralis.ui.data.InventorySlots
-
+import de.raphaelgoetz.astralis.ux.color.Colorization
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 
