@@ -15,9 +15,9 @@ enum class TaskTimeTypes{
  */
 fun TaskTimeTypes.toMilliseconds(time: Long): Long {
     return when (this) {
-        TaskTimeTypes.SECONDS -> time / 1000
-        TaskTimeTypes.MINUTES -> time / 1000 / 60
-        TaskTimeTypes.HOURS -> time / 1000 / 360
-        TaskTimeTypes.DAYS -> time / 1000 / 360 / 24
+        TaskTimeTypes.SECONDS -> time * 1000
+        TaskTimeTypes.MINUTES -> time * 1000 * 60
+        TaskTimeTypes.HOURS -> time * 1000 * 60 * 60
+        TaskTimeTypes.DAYS -> time * 1000 * 60 * 60 * 24
     }
 }
