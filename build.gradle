@@ -1,8 +1,11 @@
+import net.thebugmc.gradle.sonatypepublisher.PublishingType
+
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '2.0.0-RC2'
     id 'com.github.johnrengelman.shadow' version '8.0.0'
     id 'maven-publish'
+    id "net.thebugmc.gradle.sonatype-central-portal-publisher" version "1.2.3"
 }
 
 group = astralisGroup
@@ -42,15 +45,54 @@ kotlin {
     jvmToolchain(21)
 }
 
-publishing {
+centralPortal {
+    username = System.getenv("SONATYPE_USERNAME")
+    password = System.getenv("SONATYPE_PASSWORD")
 
-    publications {
-        create("Astralis", MavenPublication) {
-            from(components["kotlin"])
+    publishingType = PublishingType.AUTOMATIC
 
-            groupId = "de.raphaelgoetz"
-            artifactId = "astralis"
-            version = version
+    name = rootProject.name
+
+    pom {
+        name = rootProject.name
+        url = "https://github.com/building-tools/astralis"
+        description = projectDescription
+
+        licenses {
+            license {
+                name = "Apache 2.0"
+                url = "https://github.com/building-tools/astralis/blob/master/LICENSE"
+            }
+        }
+
+        developers {
+            developer {
+                id = "raphael-goetz"
+                name = "Raphael Goetz"
+                organization = "Building-tools"
+                organizationUrl = "https://github.com/building-tools"
+            }
+        }
+        scm {
+            connection = "scm:git:git://github.com/building-tools/astralis.git"
+            developerConnection = "scm:git:git@github.com:building-tools/building-tools.git"
+            url = "https://github.com/building-tools/astralis"
+            tag = "HEAD"
+        }
+
+        ciManagement {
+            system = "GitHub Actions"
+            url = "https://github.com/building-tools/astralis/actions"
         }
     }
+}
+
+signing {
+    isRequired = System.getenv("CI") != null
+
+    var privateKey = System.getenv("GPG_PRIVATE_KEY")
+    var passphrase = System.getenv("GPG_PRIVATE_PASSWORD")
+    useInMemoryPgpKeys(privateKey, passphrase)
+
+    sign(publishing.publications)
 }
