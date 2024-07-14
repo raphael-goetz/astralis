@@ -1,0 +1,32 @@
+name: Release Maven Central Publication
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set version
+        id: vars
+        run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Publish to Sonatype
+        env:
+          CORE_VERSION: ${{ env.version }}
+        run: |
+          ./gradlew publishToCentralPortal
+          echo "Version: ${SHORT_COMMIT_HASH}" >> $GITHUB_STEP_SUMMARY
