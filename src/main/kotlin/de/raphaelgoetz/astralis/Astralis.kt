@@ -1,9 +1,7 @@
 package de.raphaelgoetz.astralis
 
-import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource
-import com.destroystokyo.paper.event.brigadier.CommandRegisteredEvent
-import de.raphaelgoetz.astralis.command.astralisCommandMap
-import de.raphaelgoetz.astralis.event.listen
+import de.raphaelgoetz.astralis.command.astralisCommandList
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 import org.bukkit.plugin.java.JavaPlugin
 
 /** Instance of the main-plugin */
@@ -37,11 +35,18 @@ abstract class Astralis : JavaPlugin() {
 
     private fun registerCommands() {
 
-        /** Registers all custom commands */
-        listen<CommandRegisteredEvent<BukkitBrigadierCommandSource>> { event ->
-            astralisCommandMap[event.commandLabel].let { event.literal = it }
+        val manager = this.lifecycleManager
+
+        manager.registerEventHandler(LifecycleEvents.COMMANDS) { event ->
+            val commands = event.registrar()
+
+            astralisCommandList.forEach { command ->
+                commands.register(
+                    command.command,
+                    command.description,
+                    command.aliases
+                )
+            }
         }
-
     }
-
 }
