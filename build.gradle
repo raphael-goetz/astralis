@@ -6,6 +6,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
     id "net.thebugmc.gradle.sonatype-central-portal-publisher" version "1.2.4"
+    id 'signing'
 }
 
 group = astralisGroup
@@ -88,11 +89,9 @@ centralPortal {
 }
 
 signing {
-    isRequired = System.getenv("CI") != null
-
-    var privateKey = System.getenv("GPG_PRIVATE_KEY")
-    var passphrase = System.getenv("GPG_PRIVATE_PASSWORD")
+    required = System.getenv("CI") != null
+    def privateKey = System.getenv("GPG_PRIVATE_KEY")
+    def passphrase = System.getenv("GPG_PRIVATE_PASSWORD")
     useInMemoryPgpKeys(privateKey, passphrase)
-
-    sign(publishing.publications)
+    sign publishing.publications
 }
