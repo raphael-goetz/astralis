@@ -10,6 +10,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+shadowJar {
+    archiveClassifier.set(null)
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -47,7 +51,6 @@ publishing {
             version = "0.0.1"
 
             artifact shadowJar
-            from components.java
 
             pom {
                 name = "astralis"
