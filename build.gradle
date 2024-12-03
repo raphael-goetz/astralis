@@ -46,7 +46,7 @@ publishing {
             artifactId = "astralis"
             version = "0.0.1"
 
-            from components.java
+            from components.shadowJar
 
             pom {
                 name = "astralis"
