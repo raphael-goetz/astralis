@@ -90,7 +90,7 @@ publishing {
     repositories {
         maven {
             name = 'GitHubPackages'
-            url = 'https://maven.pkg.github.com/raphael-goetz/astralis'
+            url = 'https://maven.pkg.github.com/building-tools/astralis'
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
