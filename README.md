@@ -14,4 +14,4 @@ Astralis is a Minecraft-Kotlin framework designed for writing ux-ui enriched bui
 
 ## Usage
 
-> 📝 Documentation incomming!
+> 📝 Documentation incoming!
