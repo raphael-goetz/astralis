@@ -48,19 +48,19 @@ publishing {
         create("mavenJava", MavenPublication) {
             groupId = "de.raphaelgoetz"
             artifactId = "astralis"
-            version = "0.0.2"
+            version = "0.0.3"
 
             artifact shadowJar
 
             pom {
                 name = "astralis"
-                url = "https://github.com/building-tools/astralis"
+                url = "https://github.com/raphael-goetz/astralis"
                 description = "Astralis is a Minecraft-Framework designed to create awesome build-tools"
 
                 licenses {
                     license {
                         name = "Apache 2.0"
-                        url = "https://github.com/building-tools/astralis/blob/master/LICENSE"
+                        url = "https://github.com/raphael-goetzastralis/blob/master/LICENSE"
                     }
                 }
 
@@ -68,20 +68,18 @@ publishing {
                     developer {
                         id = "raphael-goetz"
                         name = "Raphael Goetz"
-                        organization = "Building-tools"
-                        organizationUrl = "https://github.com/building-tools"
                     }
                 }
                 scm {
-                    connection = "scm:git:git://github.com/building-tools/astralis.git"
-                    developerConnection = "scm:git:git@github.com:building-tools/building-tools.git"
-                    url = "https://github.com/building-tools/astralis"
+                    connection = "scm:git:git://github.com/raphael-goetz/astralis.git"
+                    developerConnection = "scm:git:git@github.com:raphael-goetz/raphael-goetz.git"
+                    url = "https://github.com/raphael-goetz/astralis"
                     tag = "HEAD"
                 }
 
                 ciManagement {
                     system = "GitHub Actions"
-                    url = "https://github.com/building-tools/astralis/actions"
+                    url = "https://github.com/raphael-goetz/astralis/actions"
                 }
             }
         }
@@ -90,7 +88,7 @@ publishing {
     repositories {
         maven {
             name = 'GitHubPackages'
-            url = 'https://maven.pkg.github.com/building-tools/astralis'
+            url = 'https://maven.pkg.github.com/raphael-goetz/astralis'
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
