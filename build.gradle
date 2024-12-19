@@ -48,7 +48,7 @@ publishing {
         create("mavenJava", MavenPublication) {
             groupId = "de.raphaelgoetz"
             artifactId = "astralis"
-            version = "0.0.1"
+            version = "0.0.2"
 
             artifact shadowJar
 
