@@ -46,9 +46,11 @@ kotlin {
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
+            def tagVersion = System.getenv('VERSION')
+
             groupId = "de.raphaelgoetz"
             artifactId = "astralis"
-            version = "0.0.3"
+            version = tagVersion ?: '0.0.1-SNAPSHOT'
 
             artifact shadowJar
 
