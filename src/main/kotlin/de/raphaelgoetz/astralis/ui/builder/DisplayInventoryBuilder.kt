@@ -75,12 +75,10 @@ class DisplayInventoryBuilder(
         this.setBlockedSlot(slot, SmartItem(display, InteractionType.PAGE_TURN)) {
             if (currentPageIndex + 1 >= maxPage) {
                 currentPageIndex = 0
-                println(currentPageIndex)
                 applyPage()
                 return@setBlockedSlot
             }
             currentPageIndex++
-            println(currentPageIndex)
             applyPage()
         }
     }
