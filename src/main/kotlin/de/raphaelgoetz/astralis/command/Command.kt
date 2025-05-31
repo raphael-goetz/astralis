@@ -11,7 +11,7 @@ val astralisCommandList: MutableList<AstralisCommand> = mutableListOf()
 /**
  * Automatically registers the given command.
  *
- * NEVER REGISTER IN plugin.yml OR ANYTHING.
+ * NEVER REGISTER IN plugin.yml
  */
 fun registerCommand(command: AstralisCommand) {
     astralisCommandList.add(command)

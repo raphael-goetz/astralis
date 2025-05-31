@@ -27,9 +27,9 @@ class DisplayInventoryBuilder(
     private val to: InventorySlots
 ) : InventoryBuilder(title, holder, rows) {
 
-    //to should be inclusive. That's why to + 1
+    // ´to´ should be inclusive (that's why to + 1)
     private val maxItems: Int = (to.value + 1) - from.value
-    private val pages = Lists.partition(list, maxItems)
+    private val pages = if (list.isEmpty()) listOf() else Lists.partition(list, maxItems)
     private val maxPage = pages.count()
 
     private var currentPageIndex = 0
@@ -39,6 +39,10 @@ class DisplayInventoryBuilder(
     }
 
     private fun applyPage() {
+
+        if (pages.isEmpty()) {
+            return
+        }
 
         val currentPage = pages[currentPageIndex]
 
@@ -81,5 +85,14 @@ class DisplayInventoryBuilder(
             currentPageIndex++
             applyPage()
         }
+    }
+
+    /**
+     * Sets the item to be displayed if the list of items is empty.
+     * @param slot where the item gets set.
+     * @param display of the item to be displayed.
+     */
+    fun emptyPage(slot: InventorySlots, display: ItemStack) {
+        this.setBlockedSlot(slot, SmartItem(display, InteractionType.ERROR))
     }
 }
