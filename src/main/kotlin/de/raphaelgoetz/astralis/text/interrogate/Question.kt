@@ -12,6 +12,7 @@ import de.raphaelgoetz.astralis.text.sendText
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
+import org.bukkit.event.Listener
 
 /**
  * @param questionMessage is the message the player will receive when the function is called.
@@ -33,9 +34,11 @@ inline fun Player.interrogate(
 ) {
 
     var message: Component? = null
-
     this.sendText(questionMessage)
-    val event = this.listen<AsyncChatEvent> { asyncChatEvent ->
+    lateinit var event: Listener
+
+    event = this.listen<AsyncChatEvent> { asyncChatEvent ->
+        event.unregister()
         message = asyncChatEvent.message()
         doNow {
             onAnswerReceived.invoke(this@interrogate, true, asyncChatEvent)
