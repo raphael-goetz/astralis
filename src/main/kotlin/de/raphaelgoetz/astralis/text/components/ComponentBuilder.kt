@@ -46,92 +46,84 @@ class ComponentBuilder(private val input: String) {
     var currentStyles = mutableSetOf<TextDecoration>()
     private var removeStyles = mutableSetOf<TextDecoration>()
 
-    /**
-     * @see TextDecoration for available text decorations.
-     * possible are: italic, bold, strikethrough, underlined, obfuscated.
-     * @param enabled turns the decoration on/off.
-     */
-    fun italic(enabled: Boolean) {
-        if (enabled) addStyle(TextDecoration.ITALIC)
-        else removeStyle(TextDecoration.ITALIC)
-    }
-
-    fun bold(enabled: Boolean) {
-        if (enabled) addStyle(TextDecoration.BOLD)
-        else removeStyle(TextDecoration.BOLD)
-    }
-
-    fun strikethrough(enabled: Boolean) {
-        if (enabled) addStyle(TextDecoration.STRIKETHROUGH)
-        else removeStyle(TextDecoration.STRIKETHROUGH)
-    }
-
-    fun underlined(enabled: Boolean) {
-        if (enabled) addStyle(TextDecoration.UNDERLINED)
-        else removeStyle(TextDecoration.UNDERLINED)
-    }
-
-    fun obfuscated(enabled: Boolean) {
-        if (enabled) addStyle(TextDecoration.OBFUSCATED)
-        else removeStyle(TextDecoration.OBFUSCATED)
-    }
-
-    private fun addStyle(textDecoration: TextDecoration) {
-        currentStyles.add(textDecoration)
-    }
-
-    private fun removeStyle(textDecoration: TextDecoration) {
-        removeStyles.add(textDecoration)
-    }
-
     /*
-        Events
+     * Events
      */
     var clickEvent: ClickEvent? = null
     var hoverEvent: HoverEvent<*>? = null
 
+    /*
+     * Type, color, mode
+     */
+    var type: CommunicationType? = null
+    var color: Colorization? = null
+    var resolver: Array<out TagResolver>? = null
+    var renderMode: RenderMode = RenderMode.DEFAULT
+
+    /*
+     * Style helpers
+     */
+    fun italic(enabled: Boolean) = toggleDecoration(TextDecoration.ITALIC, enabled)
+    fun bold(enabled: Boolean) = toggleDecoration(TextDecoration.BOLD, enabled)
+    fun strikethrough(enabled: Boolean) = toggleDecoration(TextDecoration.STRIKETHROUGH, enabled)
+    fun underlined(enabled: Boolean) = toggleDecoration(TextDecoration.UNDERLINED, enabled)
+    fun obfuscated(enabled: Boolean) = toggleDecoration(TextDecoration.OBFUSCATED, enabled)
+
+    private fun toggleDecoration(decoration: TextDecoration, enabled: Boolean) {
+        if (enabled) currentStyles.add(decoration) else removeStyles.add(decoration)
+    }
+
+    /*
+     * Click / Hover event helpers
+     */
     fun onOpenURL(url: String) = applyClickEvent(ClickEvent.openUrl(url))
     fun onOpenFile(file: String) = applyClickEvent(ClickEvent.openFile(file))
     fun onRunCommand(command: String) = applyClickEvent(ClickEvent.runCommand(command))
     fun onSuggestCommand(command: String) = applyClickEvent(ClickEvent.suggestCommand(command))
     fun onCopyClipboard(text: String) = applyClickEvent(ClickEvent.copyToClipboard(text))
-
-    private fun applyClickEvent(event: ClickEvent) {
-        this.clickEvent = event
-    }
-
-    fun onHoverText(text: Component) {
-        this.hoverEvent = HoverEvent.showText(text)
-    }
+    private fun applyClickEvent(event: ClickEvent) { this.clickEvent = event }
+    fun onHoverText(text: Component) { this.hoverEvent = HoverEvent.showText(text) }
 
     /*
-        Types
+     * Builder core
      */
-    var type: CommunicationType? = null
-    var color: Colorization? = null
-
-    var resolver: Array<out TagResolver>? = null
-
     fun build(): AdventureMessage {
-
         var textComponent =
             if (resolver == null) MiniMessage.miniMessage().deserialize(input)
             else MiniMessage.miniMessage().deserialize(input, *resolver!!)
 
         var styleBuilder = textComponent.style()
 
+        // Apply decorations
         currentStyles.forEach { styleBuilder = styleBuilder.decoration(it, true) }
-        removeStyles.forEach { styleBuilder = styleBuilder.decoration(it, true) }
+        removeStyles.forEach { styleBuilder = styleBuilder.decoration(it, false) }
 
+        // Apply events
         clickEvent?.let { styleBuilder = styleBuilder.clickEvent(it) }
         hoverEvent?.let { styleBuilder = styleBuilder.hoverEvent(hoverEvent) }
         color?.let { styleBuilder = styleBuilder.color(it.rgbLike) }
 
+        // 🔹 Apply lore-specific rules
+        if (renderMode == RenderMode.LORE) {
+            styleBuilder = styleBuilder
+                .decoration(TextDecoration.ITALIC, false) // disable italics
+            if (color == null && type != null) {
+                styleBuilder = styleBuilder.color(type!!.color.rgbLike)
+            }
+        }
+
+        // Apply communication type
         type?.let {
             styleBuilder = styleBuilder.color(it.color.rgbLike)
             textComponent = Component.text(it.icon).append(textComponent)
         }
 
+
         return AdventureMessage(textComponent.style(styleBuilder).asComponent(), type?.sound)
     }
+}
+
+enum class RenderMode {
+    DEFAULT, // normal behavior (chat, messages, etc.)
+    LORE     // special mode for item descriptions
 }
