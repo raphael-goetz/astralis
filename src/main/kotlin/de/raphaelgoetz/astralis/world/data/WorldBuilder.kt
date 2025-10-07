@@ -63,7 +63,6 @@ private fun applyGameRules(name: String) {
         world.setGameRule(GameRule.DO_ENTITY_DROPS, false)
         world.setGameRule(GameRule.DO_ENTITY_DROPS, false)
         world.setGameRule(GameRule.KEEP_INVENTORY, true)
-        world.setGameRule(GameRule.SPAWN_CHUNK_RADIUS, 0)
     }
 
     doLater(2000) {
